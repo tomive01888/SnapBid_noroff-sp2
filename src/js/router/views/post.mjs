@@ -34,21 +34,6 @@ if (!sessionStorage.token) {
   document.getElementById("view-bid-history").classList.remove("hidden");
 }
 
-function handleEditorConsole() {
-  const userName = JSON.parse(sessionStorage.getItem("SnapBid-User"));
-  const editorConsole = document.getElementById("editor-console");
-
-  if (!userName) return;
-
-  if (userName.name !== listingData.seller.name) {
-    editorConsole.classList.add("hidden");
-  } else {
-    editorConsole.classList.remove("hidden");
-    editorConsole.classList.add("flex");
-  }
-}
-handleEditorConsole();
-
 async function activateSingleListing() {
   populateListingDetails(listingData);
   createImageGallery("image-container", listingData.media);
@@ -83,3 +68,18 @@ if (!sessionStorage.bidSuccess === false) {
   showToastMessage("Bid successfully placed", "success");
   sessionStorage.removeItem("bidSuccess");
 }
+
+async function handleEditorConsole() {
+  const userName = JSON.parse(sessionStorage.getItem("SnapBid-User"));
+  const editorConsole = document.getElementById("editor-console");
+
+  if (!userName) return;
+
+  if (userName.name !== listingData.seller.name) {
+    editorConsole.classList.add("hidden");
+  } else {
+    editorConsole.classList.remove("hidden");
+    editorConsole.classList.add("flex");
+  }
+}
+handleEditorConsole();
