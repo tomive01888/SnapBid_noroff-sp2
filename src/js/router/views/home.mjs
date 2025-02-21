@@ -42,7 +42,7 @@ checkAuthAndFetchProfile();
 
 const message = sessionStorage.getItem("logging-in");
 if (message) {
-  showToastMessage(message, "error");
+  showToastMessage(message, "success");
   sessionStorage.removeItem("logging-in");
 }
 
