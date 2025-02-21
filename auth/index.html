@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnapBid | Account</title>
+    <script type="module" src="/src/app.mjs"></script>
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Sans+Narrow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#F1F1F1]">
+    <header
+      class="sticky top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
+    >
+      <div class="w-full max-w-[76rem] flex">
+        <div class="flex w-full md:relative md:z-[999]">
+          <a href="/"
+            ><img
+              src="/snapbid_logo.png"
+              alt="Snap Bid Logo"
+              class="w-auto h-auto max-h-12 md:absolute md:-bottom-9 md:max-h-20"
+          /></a>
+        </div>
+        <label aria-label="Toggle mobile menu" for="ham-btn" class="md:hidden">
+          <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center scale-125">
+            <input class="hidden peer" type="checkbox" id="ham-btn" />
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]"
+            ></div>
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-md transition-all duration-300 origin-center peer-checked:hidden"
+            ></div>
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]"
+            ></div>
+          </div>
+        </label>
+        <div
+          id="burger-menu"
+          class="absolute top-[64px] left-0 min-h-screen w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
+        >
+          <div class="w-full mt-8 flex flex-col gap-8 items-center md:m-0">
+            <div
+              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:h-5"
+            >
+              <div id="profile-wrapper" class="hidden gap-2">
+                <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
+                <p id="username" class="text-xl text-white md:text-sm">User_test_192837</p>
+              </div>
+
+              <div id="wallet-wrapper" class="hidden border max-w-3xs rounded-sm md:border-none md:w-fit">
+                <p class="text-xl text-white p-4 text-center md:p-0 md:text-sm">
+                  Wallet: <span id="credits" class="font-semibold">1</span>$
+                </p>
+              </div>
+            </div>
+
+            <nav class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1">
+              <a
+                href="/"
+                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
+                >Home</a
+              >
+              <a
+                id="profile-link"
+                href="../profile/index.html"
+                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
+                >My profile</a
+              >
+
+              <a
+                href="./auth/index.html"
+                id="account-button"
+                class="bg-blue-500 cursor-pointer text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
+                >Account</a
+              >
+
+              <button
+                type="button"
+                id="logout"
+                onclick="logoutListener()"
+                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
+              >
+                Logout
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="min-h-[85vh] flex flex-col items-center justify-start mt-32">
+      <div class="flex flex-col items-center justify-center w-full h-fit max-w-[32rem] place-items-center p-4">
+        <h1 class="w-full font-header text-4xl font-bold my-4 text-center">Account</h1>
+        <div class="flex gap-1 mb-1 w-full">
+          <div class="w-full">
+            <input type="radio" name="authType" value="login" id="login" class="peer hidden" checked />
+            <label
+              aria-label="toggle active login form"
+              for="login"
+              class="cursor-pointer text-2xl w-full block border rounded-md p-2 text-center bg-white peer-checked:bg-blue-500 peer-checked:hover:bg-blue-500 peer-checked:text-white hover:bg-blue-500/20"
+            >
+              Login
+            </label>
+          </div>
+
+          <div class="w-full">
+            <input type="radio" name="authType" value="register" id="register" class="peer hidden" />
+            <label
+              aria-label="toggle active register form"
+              for="register"
+              class="cursor-pointer text-2xl w-full block border rounded-md p-2 text-center bg-white peer-checked:bg-blue-500 peer-checked:hover:bg-blue-500 peer-checked:text-white hover:bg-blue-500/20"
+            >
+              Register
+            </label>
+          </div>
+        </div>
+
+        <div class="w-full max-w-[32rem] h-[30rem] border rounded-md p-4 relative bg-white shadow-xl">
+          <form id="loginForm" class="flex flex-col gap-2" name="login" novalidate>
+            <div class="flex flex-col">
+              <label for="loginEmail" class="form-label w-full">Email</label>
+              <input
+                id="loginEmail"
+                type="email"
+                name="email"
+                required
+                class="p-2 border rounded bg-white"
+                aria-describedby="emailHelp"
+              />
+              <small id="emailHelp" class="sr-only">Enter your email address</small>
+            </div>
+
+            <div class="flex flex-col">
+              <label for="loginPassword" class="form-label">Password</label>
+              <input
+                id="loginPassword"
+                type="password"
+                name="password"
+                required
+                class="p-2 border rounded bg-white"
+                aria-describedby="passwordHelp"
+              />
+              <small id="passwordHelp" class="sr-only">Enter your password</small>
+            </div>
+
+            <button
+              type="submit"
+              class="bg-blue-500 text-white p-2 rounded absolute bottom-2 w-52 left-[50%] -translate-x-[50%]"
+              aria-label="Login to your account"
+            >
+              Login
+            </button>
+          </form>
+
+          <form id="registerForm" class="flex-col gap-2 hidden" name="register" novalidate>
+            <div class="flex flex-col">
+              <label for="name">Name:</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                required
+                maxlength="20"
+                pattern="^[\w]+$"
+                title="Please enter a username using only letters and numbers"
+                placeholder="Enter your name"
+                class="p-2 border rounded bg-white"
+                aria-describedby="nameError"
+              />
+              <span id="nameError" class="error-message hidden" aria-live="assertive"></span>
+            </div>
+
+            <div class="flex flex-col">
+              <label for="email">Email:</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                required
+                pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
+                title="Please enter a valid noroff.no or stud.noroff.no address"
+                placeholder="Enter your email"
+                class="p-2 border rounded bg-white"
+                aria-describedby="nameError"
+              />
+              <span id="emailError" class="error-message hidden" aria-live="assertive"></span>
+            </div>
+
+            <div class="flex flex-col">
+              <label for="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                minlength="8"
+                placeholder="Enter your password"
+                required
+                class="p-2 border rounded bg-white"
+                aria-describedby="nameError"
+              />
+              <span id="passwordError" class="error-message hidden" aria-live="assertive"></span>
+            </div>
+            <button
+              type="submit"
+              class="bg-green-500 text-white p-2 rounded absolute bottom-2 w-52 left-[50%] -translate-x-[50%]"
+            >
+              Register
+            </button>
+          </form>
+        </div>
+        <div id="error-container" class="error-message mt-4 hidden">
+          <span id="error-message" class="text-red-600"></span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
+      <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <div class="bg-transparent">
+          <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
+          <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

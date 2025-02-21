@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnapBid | Home</title>
+    <script type="module" src="/src/app.mjs"></script>
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Sans+Narrow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#F1F1F1] scroll-smooth">
+    <header
+      class="sticky top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
+    >
+      <div class="w-full max-w-[76rem] flex">
+        <div class="flex w-full md:relative md:z-[999]">
+          <a
+            ><img
+              src="/snapbid_logo.png"
+              alt="Snap Bid Logo"
+              class="w-auto h-auto max-h-12 md:absolute md:-bottom-9 md:max-h-20"
+          /></a>
+        </div>
+        <label aria-label="Toggle mobile menu" for="ham-btn" class="md:hidden">
+          <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center scale-125">
+            <input class="hidden peer" type="checkbox" id="ham-btn" />
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]"
+            ></div>
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-md transition-all duration-300 origin-center peer-checked:hidden"
+            ></div>
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]"
+            ></div>
+          </div>
+        </label>
+        <div
+          id="burger-menu"
+          class="absolute top-[64px] left-0 min-h-svh w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
+        >
+          <div class="w-full mt-8 flex flex-col gap-8 items-center md:m-0">
+            <div
+              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:h-5"
+            >
+              <div id="profile-wrapper" class="hidden gap-2">
+                <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
+                <p id="username" class="text-xl text-white md:text-sm">Guest</p>
+              </div>
+
+              <div id="wallet-wrapper" class="hidden border max-w-3xs rounded-sm md:border-none md:w-fit">
+                <p class="text-xl text-white p-4 text-center md:p-0 md:text-sm">
+                  Wallet: <span id="credits" class="font-semibold">0</span>$
+                </p>
+              </div>
+            </div>
+
+            <nav class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1">
+              <a
+                class="bg-blue-500 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md"
+                >Home</a
+              >
+              <a
+                id="profile-link"
+                href="/profile/index.html"
+                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
+                >My profile</a
+              >
+
+              <a
+                href="/auth/index.html"
+                id="account-button"
+                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
+                >Account</a
+              >
+
+              <button
+                type="button"
+                id="logout"
+                onclick="logoutListener()"
+                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
+              >
+                Logout
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full flex flex-col p-2 my-24">
+      <h1 class="text-4xl w-full md:max-w-[64rem] m-auto text-center text-pretty font-bold">Welcome to SnapBid</h1>
+
+      <div class="w-full md:max-w-[64rem] m-auto [50svh]">
+        <div
+          class="w-full max-w-96 m-auto mt-8 bg-white border-1 border-gray-500 rounded-md flex gap-2 p-2 items-center"
+        >
+          <label for="search-listing">Search</label>
+          <input
+            type="search"
+            id="search-listing"
+            placeholder="...."
+            class="w-full border-1 border-gray-300 rounded-full px-2 py-1 scroll-mt-56"
+          />
+        </div>
+        <div class="flex flex-col items-center gap-2 md:gap-0 sm:flex-row justify-between w-full max-w-96 m-auto mt-4">
+          <div>
+            <label for="category-select">Filter by Category:</label>
+            <select id="category-select" class="bg-white px-4 py-1 rounded-sm shadow-lg border-1 border-gray-500">
+              <option value="">All Categories</option>
+              <option value="Vacation">Vacation</option>
+              <option value="Art">Art</option>
+              <option value="Watches">Watches</option>
+              <option value="Jewelry">Jewelry</option>
+              <option value="Vintage">Vintage</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Cars">Cars</option>
+              <option value="Interiors">Interiors</option>
+              <option value="Decor">Decor</option>
+              <option value="Games">Games</option>
+              <option value="Books">Books</option>
+              <option value="Toys">Toys</option>
+              <option value="Sports">Sports</option>
+              <option value="Collectibles">Collectibles</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <label for="enable-inactive-listings">Show inactive listings </label
+            ><input
+              id="enable-inactive-listings"
+              type="checkbox"
+              class="scale-120"
+              aria-label="Check to turn on inactive listings"
+            />
+          </div>
+        </div>
+
+        <div
+          id="listings-container"
+          class="w-full max-w-2xl lg:max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 min-h-[50svh] m-auto"
+        >
+          <div class="w-full h-[33rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"></div>
+          <div class="w-full h-[33rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"></div>
+          <div class="w-full h-[33rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"></div>
+          <div class="w-full h-[33rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"></div>
+          <div class="w-full h-[33rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"></div>
+          <div class="w-full h-[33rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"></div>
+        </div>
+
+        <div id="top-paginator" class="flex items-center justify-center gap-4 min-h-full z-0 mt-8">
+          <button
+            id="prev-posts"
+            type="button"
+            class="h-8 w-10 grid relative border rounded-md border-gray-100 bg-white shadow-lg cursor-pointer hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
+          >
+            <span class="text-3xl absolute left-1/2 -translate-x-1/2 bottom-[0.5px]">&#8249;</span>
+          </button>
+          <button
+            id="next-posts"
+            type="button"
+            class="h-8 w-10 grid relative border rounded-md border-gray-100 bg-white shadow-lg cursor-pointer hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
+          >
+            <span class="text-3xl absolute left-1/2 -translate-x-1/2 bottom-[0.5px]">&#8250;</span>
+          </button>
+
+          <div class="flex items-center gap-3">
+            <label for="go-to" class="whitespace-nowrap drop-shadow-lg">Page</label>
+            <input
+              class="w-14 text-center text-lg p-1 go-to rounded-md shadow-lg bg-white"
+              type="number"
+              id="go-to"
+              name="go-to"
+              min="1"
+            />
+            <p class="whitespace-nowrap max-page">of</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
+      <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <div>
+          <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
+          <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
