@@ -40,10 +40,10 @@ export async function checkAuthAndFetchProfile(forceRefresh = false) {
 
 checkAuthAndFetchProfile();
 
-const message = sessionStorage.getItem("toastMessage");
+const message = sessionStorage.getItem("logging-in");
 if (message) {
-  showToastMessage(message, "success");
-  sessionStorage.removeItem("toastMessage");
+  showToastMessage(message, "error");
+  sessionStorage.removeItem("logging-in");
 }
 
 if (sessionStorage.getItem("delete-listing") === "true") {

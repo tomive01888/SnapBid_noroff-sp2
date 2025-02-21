@@ -206,7 +206,7 @@ export async function createAuctionForm() {
     submitBtn.appendChild(loader);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 4000));
       postNewListing();
       form.reset();
     } catch (error) {

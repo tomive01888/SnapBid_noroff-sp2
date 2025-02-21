@@ -38,14 +38,14 @@ export async function onLogin(event) {
     const { accessToken, ...userData } = data.data;
     sessionStorage.setItem("token", accessToken);
     sessionStorage.setItem("SnapBid-User", JSON.stringify(userData));
-    sessionStorage.setItem("toastMessage", `Welcome ${userData.name} to SnapBid!`);
+    sessionStorage.setItem("logging-in", `Welcome ${userData.name} to SnapBid!`);
 
     window.location.href = "/";
   } catch (error) {
     console.error("Login failed:", error);
     showToastMessage(error.message, "error");
     setTimeout(() => {
-      sessionStorage.removeItem("toastMessage");
+      sessionStorage.removeItem("logging-in");
     }, 4000);
   }
 }

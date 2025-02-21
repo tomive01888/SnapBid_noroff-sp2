@@ -60,6 +60,7 @@ export async function fetchAndDisplayOwnBids() {
         _count: listing.data._count,
         endsAt: listing.data.endsAt,
         title: listing.data.title,
+        id: listing.data.id,
       };
     });
 
