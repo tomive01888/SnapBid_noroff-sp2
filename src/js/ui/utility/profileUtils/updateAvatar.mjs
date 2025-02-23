@@ -25,6 +25,10 @@ export async function updateProfileAvatar(event, user) {
   const avatarUrl = document.getElementById("avatar-url").value.trim();
   const token = sessionStorage.getItem("token");
 
+  if (!avatarUrl) {
+    return;
+  }
+
   const dataToSend = {
     avatar: {
       url: avatarUrl || "",

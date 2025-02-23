@@ -11,23 +11,15 @@
  */
 export function compareUserAccess() {
   const token = sessionStorage.getItem("token");
-  const loggedUser = JSON.parse(sessionStorage.getItem("SnapBid-User"));
   const userCredit = sessionStorage.getItem("SnapBid-Credits");
+  const userName = JSON.parse(sessionStorage.getItem("SnapBid-User"));
 
-  if (!token || !loggedUser) {
-    document.getElementById("profile-link").classList.add("hidden");
-    document.getElementById("account-button").classList.remove("hidden");
-    document.getElementById("profile-wrapper").classList.add("hidden");
-    document.getElementById("wallet-wrapper").classList.add("hidden");
-    document.getElementById("logout").classList.add("hidden");
-  } else {
-    document.getElementById("account-button").classList.add("hidden");
+  if (token) {
     document.getElementById("profile-wrapper").classList.remove("hidden");
     document.getElementById("profile-wrapper").classList.add("flex");
     document.getElementById("wallet-wrapper").classList.remove("hidden");
-    document.getElementById("profile-link").classList.remove("hidden");
-    document.getElementById("logout").classList.remove("hidden");
-    document.getElementById("username").textContent = loggedUser.name;
+    document.getElementById("new-listing").classList.remove("hidden");
+    document.getElementById("username").textContent = userName.name;
     document.getElementById("credits").textContent = userCredit;
   }
 }

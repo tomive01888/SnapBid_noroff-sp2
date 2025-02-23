@@ -20,6 +20,7 @@ export async function hamburgerToggle() {
 
   function resetMenuOnResize() {
     if (window.innerWidth >= 768) {
+      hamburgerIcon.checked = false;
       hamburgerContainer.classList.add("hidden");
     }
   }

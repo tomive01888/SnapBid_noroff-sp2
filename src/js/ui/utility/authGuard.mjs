@@ -1,3 +1,5 @@
+import { showToastMessage } from "../toastMessages/showToastMessage.mjs";
+
 /**
  * Restricts access to authenticated users only.
  * If no authentication token is found in session storage, an alert is displayed,
@@ -5,9 +7,8 @@
  */
 export function authGuard() {
   if (!sessionStorage.token) {
-    alert(
-      "Access restricted: You must be logged in to view this page. Registration is required if you don't already have an account."
-    );
+    showToastMessage("Access restricted, only registered user can access this page", "error");
+
     window.location.href = "/auth/index.html";
   }
 }

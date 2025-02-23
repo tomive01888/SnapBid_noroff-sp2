@@ -1,8 +1,8 @@
 import { showToastMessage } from "../toastMessages/showToastMessage.mjs";
 import { generateAuctionCards } from "./listingCardCreator.mjs";
-import { fetchSearchResults } from "../utility/home/searchHandler.mjs";
-import { fetchFilteredListingsCaseInsensitive } from "../utility/home/categoryAndActiveHandler.mjs";
-import { fetchAllListings } from "../utility/home/fetchAllListings.mjs";
+import { fetchSearchResults } from "../utility/homeUtils/searchHandler.mjs";
+import { fetchFilteredListingsCaseInsensitive } from "../utility/homeUtils/categoryAndActiveHandler.mjs";
+import { fetchAllListings } from "../utility/homeUtils/fetchAllListings.mjs";
 
 document.getElementById("search-listing").addEventListener("input", async () => {
   document.getElementById("enable-inactive-listings").checked = false;

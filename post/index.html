@@ -15,7 +15,7 @@
   </head>
   <body class="bg-[#F1F1F1]">
     <header
-      class="sticky top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
+      class="sticky h-14 top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
     >
       <div class="w-full max-w-[76rem] flex">
         <div class="flex w-full md:relative md:z-[999]">
@@ -23,7 +23,7 @@
             ><img
               src="/snapbid_logo.png"
               alt="Snap Bid Logo"
-              class="w-auto h-auto max-h-12 md:absolute md:-bottom-9 md:max-h-20"
+              class="w-auto h-auto max-h-12 md:absolute md:-bottom-11 md:max-h-22 transform-width duration-300"
           /></a>
         </div>
         <label aria-label="Toggle mobile menu" for="ham-btn" class="md:hidden">
@@ -42,15 +42,16 @@
         </label>
         <div
           id="burger-menu"
-          class="absolute top-[64px] left-0 min-h-svh w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
+          class="absolute top-[56px] left-0 min-h-svh w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
         >
           <div class="w-full mt-8 flex flex-col gap-8 items-center md:m-0">
             <div
-              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:h-5"
+              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:items-center md:h-7"
             >
               <div id="profile-wrapper" class="hidden gap-2">
-                <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
-                <p id="username" class="text-xl text-white md:text-sm">Guest</p>
+                <p class="text-xl text-white/70 md:text-sm">
+                  Logged in as: <span id="username" class="text-xl text-white md:text-sm">Guest</span>
+                </p>
               </div>
 
               <div id="wallet-wrapper" class="hidden border max-w-3xs rounded-sm md:border-none md:w-fit">
@@ -60,35 +61,10 @@
               </div>
             </div>
 
-            <nav class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1">
-              <a
-                href="/"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >Home</a
-              >
-              <a
-                id="profile-link"
-                href="../profile/index.html"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >My profile</a
-              >
-
-              <a
-                href="../auth/index.html"
-                id="account-button"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >Account</a
-              >
-
-              <button
-                type="button"
-                id="logout"
-                onclick="logoutListener()"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-              >
-                Logout
-              </button>
-            </nav>
+            <nav
+              id="navbar"
+              class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1"
+            ></nav>
           </div>
         </div>
       </div>
@@ -224,6 +200,9 @@
 
     <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
       <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <a href="/post/create/index.html" id="new-listing" class="hidden self-end text-lg text-white underline"
+          >Create a new listing</a
+        >
         <div>
           <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
           <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>

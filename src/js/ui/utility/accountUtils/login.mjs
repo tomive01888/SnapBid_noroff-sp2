@@ -2,6 +2,7 @@ import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionRegisterAndLogin } from "../../../api/apiRequestOptions.mjs";
 import { LOGIN_ENDPOINT } from "../../../api/constants.mjs";
 import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
+import { fetchAuctionProfileInfo } from "../profileUtils/fetchAuctionProfile.mjs";
 
 /**
  * Handles user login by validating input, sending a login request to the API, and storing the returned token and user data.
@@ -40,7 +41,11 @@ export async function onLogin(event) {
     sessionStorage.setItem("SnapBid-User", JSON.stringify(userData));
     sessionStorage.setItem("logging-in", `Welcome ${userData.name} to SnapBid!`);
 
-    window.location.href = "/";
+    await fetchAuctionProfileInfo(data.data.name, data.data.accessToken);
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 500);
   } catch (error) {
     console.error("Login failed:", error);
     showToastMessage(error.message, "error");

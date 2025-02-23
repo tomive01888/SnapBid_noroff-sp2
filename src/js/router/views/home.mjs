@@ -1,13 +1,13 @@
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
-import { fetchAuctionProfileInfo } from "../../ui/utility/profile-utils/fetchAuctionProfile.mjs";
 import { goToPage, initializeHome, nextPage, prevPage } from "../../ui/component/paginator&HomeStartup.mjs";
 import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
-import { logoutListener, updateUIForLogout } from "../../ui/globals/logoutHandling.mjs";
 import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
+import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 
+generateNavbar();
 hamburgerToggle();
 initializeHome();
-window.logoutListener = logoutListener;
+compareUserAccess();
 
 document.getElementById("next-posts").addEventListener("click", nextPage);
 document.getElementById("prev-posts").addEventListener("click", prevPage);
@@ -19,26 +19,6 @@ if (goToInput) {
     goToPage(pageInput);
   });
 }
-
-export async function checkAuthAndFetchProfile(forceRefresh = false) {
-  const token = sessionStorage.getItem("token");
-  const userName = sessionStorage.getItem("SnapBid-User");
-
-  if (!token || !userName) {
-    updateUIForLogout();
-    return;
-  }
-
-  if (!sessionStorage.getItem("auctionProfileFetched") || forceRefresh) {
-    fetchAuctionProfileInfo();
-    sessionStorage.setItem("auctionProfileFetched", "true");
-  }
-  setTimeout(() => {
-    compareUserAccess();
-  }, 400);
-}
-
-checkAuthAndFetchProfile();
 
 const message = sessionStorage.getItem("logging-in");
 if (message) {

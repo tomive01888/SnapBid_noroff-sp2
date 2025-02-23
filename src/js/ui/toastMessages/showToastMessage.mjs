@@ -17,7 +17,7 @@ export function showToastMessage(message, type = "success") {
 
   if (document.querySelector(".toast-message")) return;
 
-  const duration = 5000;
+  const duration = 3500;
 
   const toast = document.createElement("div");
   toast.className = `toast-message fixed z-[99999] top-22 right-[-200px] flex items-center w-full max-w-[290px] md:max-w-[350px] p-2 text-gray-500 bg-gray-600 rounded-lg shadow-sm transition-transform duration-500 ease-out`;

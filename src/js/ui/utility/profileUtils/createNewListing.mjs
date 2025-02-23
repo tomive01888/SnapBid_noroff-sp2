@@ -44,12 +44,17 @@ export async function postNewListing() {
     endsAt: endsAt.toISOString(),
   };
 
-  console.log(AUCTION_LISTING_ENDPOINT);
-
   try {
     const req = await handleApiRequest(AUCTION_LISTING_ENDPOINT, optionPost(listingsData, token));
 
     if (req) {
+      const goToListing = document.getElementById("go-to-listing");
+      goToListing.disabled = false;
+      goToListing.addEventListener(
+        "click",
+        () => (window.location.href = `/post/index.html?listing_id=${req.data.id}`)
+      );
+
       showToastMessage("Your auction listing has been created!", "success");
     }
   } catch (error) {

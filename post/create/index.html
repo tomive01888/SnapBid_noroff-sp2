@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SnapBid | Home</title>
-    <script type="module" src="/src/app.mjs"></script>
+    <title id="head-title">SnapBid | Listing</title>
+    <script type="module" src="../../src/app.mjs"></script>
     <link rel="icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,19 +13,18 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#F1F1F1] scroll-smooth">
+  <body class="bg-[#F1F1F1]">
     <header
       class="sticky h-14 top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
     >
       <div class="w-full max-w-[76rem] flex">
         <div class="flex w-full md:relative md:z-[999]">
-          <button>
-            <img
+          <a id="logo-btn" href="/"
+            ><img
               src="/snapbid_logo.png"
               alt="Snap Bid Logo"
               class="w-auto h-auto max-h-12 md:absolute md:-bottom-11 md:max-h-22 transform-width duration-300"
-            />
-          </button>
+          /></a>
         </div>
         <label aria-label="Toggle mobile menu" for="ham-btn" class="md:hidden">
           <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center scale-125">
@@ -71,31 +70,29 @@
       </div>
     </header>
 
-    <main class="w-full flex flex-col p-2 my-24">
-      <h1 class="text-4xl w-full md:max-w-[64rem] m-auto text-center text-pretty font-bold">Welcome to SnapBid</h1>
+    <main class="min-h-svh">
+      <div
+        class="m-auto w-full max-w-[32rem] bg-white rounded-md p-4 md:p-8 md:max-w-[54rem] flex flex-col items-center gap-1 my-22"
+      >
+        <h1 class="place-self-start text-2xl sm:text-4xl font-bold my-4">Create a new listing</h1>
 
-      <div class="w-full md:max-w-[64rem] m-auto [50svh]">
-        <div
-          class="w-full max-w-96 m-auto mt-8 bg-white border-1 border-gray-500 rounded-md flex gap-2 p-2 items-center"
-        >
-          <label for="search-listing">Search</label>
-          <input
-            type="search"
-            id="search-listing"
-            placeholder="...."
-            class="w-full border-1 border-gray-300 rounded-full px-2 py-1 scroll-mt-56"
-            aria-label="Search for listing"
-          />
-        </div>
-        <div class="flex flex-col items-center gap-2 md:gap-0 sm:flex-row justify-between w-full max-w-96 m-auto mt-4">
-          <div>
-            <label for="category-select">Filter by Category:</label>
-            <select
-              id="category-select"
-              class="bg-white px-4 py-1 rounded-sm shadow-lg border-1 border-gray-500"
-              aria-label="Search for listing with predefined categories"
-            >
-              <option value="">All Categories</option>
+        <div id="creating" class="flex flex-col content-container w-full">
+          <form name="createNewListing" id="auctionForm" class="w-full flex flex-col p-4 border rounded-lg bg-white">
+            <label for="title-input" class="text-sm">Title:</label>
+            <input id="title-input" type="text" name="title" maxlength="100" required class="border p-2 rounded" />
+
+            <label for="description-input" class="text-sm mt-4">Description:</label>
+            <textarea
+              id="description-input"
+              name="description"
+              maxlength="280"
+              rows="4"
+              class="border p-2 rounded min-h-36 max-h-72"
+            ></textarea>
+
+            <label for="category-input" class="text-sm mt-4">Category:</label>
+            <select id="category-input" name="category" class="border p-2 rounded">
+              <option value="">Select category</option>
               <option value="Vacation">Vacation</option>
               <option value="Art">Art</option>
               <option value="Watches">Watches</option>
@@ -115,85 +112,60 @@
               <option value="Sports">Sports</option>
               <option value="Collectibles">Collectibles</option>
             </select>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <label for="enable-inactive-listings">Show inactive listings </label
-            ><input
-              id="enable-inactive-listings"
-              type="checkbox"
-              class="scale-120"
-              aria-label="Tick off box to include inactive listings"
-            />
-          </div>
-        </div>
 
-        <div
-          id="listings-container"
-          class="w-full max-w-2xl lg:max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 min-h-[50svh] m-auto"
-        >
-          <div
-            role="status"
-            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-        </div>
+            <label for="duration-input" class="text-sm mt-4">Duration:</label>
+            <select id="duration-input" name="duration" class="border p-2 rounded">
+              <option value="3">3 days</option>
+              <option value="7">7 days</option>
+              <option value="30">30 days</option>
+              <option value="60">60 days</option>
+            </select>
 
-        <div id="top-paginator" class="flex items-center justify-center gap-4 min-h-full z-0 mt-8">
+            <p for="media-inputs-container" class="mt-4">Media:</p>
+            <div id="media-inputs-container" class="flex flex-col gap-1 mt-4">
+              <div class="flex items-center gap-2">
+                <input type="text" name="media[]" placeholder="Add media url" class="border p-2 rounded flex-grow" />
+              </div>
+            </div>
+
+            <button type="button" class="flex cursor-pointer gap-2 disabled:opacity-50 mt-4" id="add-media-btn">
+              <div class="w-6 h-6 border-3 border-blue-400 rounded-full relative flex items-center justify-center">
+                <span class="absolute w-3 h-1 bg-blue-400 rounded"></span>
+                <span class="absolute h-3 w-1 bg-blue-400 rounded"></span>
+              </div>
+              <p class="text-blue-400">Add more media</p>
+            </button>
+
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-600 cursor-pointer text-white p-2 rounded mt-4"
+              id="submit-btn"
+            >
+              Submit
+              <div
+                id="loader"
+                class="hidden w-6 h-6 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin m-auto"
+              ></div>
+            </button>
+          </form>
+
           <button
-            id="prev-posts"
+            disabled
             type="button"
-            class="h-8 w-10 grid relative border rounded-md border-gray-100 bg-white shadow-lg cursor-pointer hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
+            id="go-to-listing"
+            class="w-full max-w-96 m-auto mt-8 p-2 bg-blue-500 hover:bg-blue-600 text-white rounded disabled:text-gray-500 disabled:bg-gray-200"
           >
-            <span class="text-3xl absolute left-1/2 -translate-x-1/2 bottom-[0.5px]">&#8249;</span>
+            Go to newly created listing
           </button>
-          <button
-            id="next-posts"
-            type="button"
-            class="h-8 w-10 grid relative border rounded-md border-gray-100 bg-white shadow-lg cursor-pointer hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100"
-          >
-            <span class="text-3xl absolute left-1/2 -translate-x-1/2 bottom-[0.5px]">&#8250;</span>
-          </button>
-
-          <div class="flex items-center gap-3">
-            <label for="go-to" class="whitespace-nowrap drop-shadow-lg">Page</label>
-            <input
-              class="w-14 text-center text-lg p-1 go-to rounded-md shadow-lg bg-white"
-              type="number"
-              id="go-to"
-              name="go-to"
-              min="1"
-            />
-            <p class="whitespace-nowrap max-page">of</p>
-          </div>
         </div>
       </div>
     </main>
 
     <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
-      <div class="w-full max-w-[76rem] flex m-auto flex-col">
-        <a href="/post/create/index.html" id="new-listing" class="hidden self-end text-lg text-white underline"
-          >Create a new listing</a
-        >
-
+      <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <button type="button" id="new-listing" class="hidden self-end text-lg text-white underline">
+          Create a new listing
+        </button>
         <div>
           <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
           <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>

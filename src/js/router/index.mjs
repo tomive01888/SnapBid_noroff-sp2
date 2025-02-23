@@ -23,11 +23,21 @@ export default async function router(pathname = window.location.pathname) {
     case pathname.includes("/auth/"):
       await import("./views/account.mjs");
       break;
+    case pathname.includes("/post/create/"):
+      await import("./views/postCreate.mjs");
+      break;
     case pathname.includes("/post/"):
       await import("./views/post.mjs");
       break;
-    case pathname.includes("/profile/"):
-      await import("./views/profile.mjs");
+
+    case pathname.includes("/profile/listing/"):
+      await import("./views/profileListing.mjs");
+      break;
+    case pathname.includes("/profile/bids/"):
+      await import("./views/profileBids.mjs");
+      break;
+    case pathname.includes("/profile/wins/"):
+      await import("./views/profileWins.mjs");
       break;
     default:
       console.log("404 - Path not found:", pathname);
