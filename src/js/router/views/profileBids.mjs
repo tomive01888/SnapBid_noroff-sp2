@@ -35,5 +35,5 @@ if (sessionStorage.getItem("avatar-update") === "success") {
 
 const loadMoreBtn = document.getElementById("loadMoreBids");
 loadMoreBtn.addEventListener("click", () => {
-  fetchAndDisplayOwnBids(true); // Fetch next batch
+  fetchAndDisplayOwnBids(true);
 });
