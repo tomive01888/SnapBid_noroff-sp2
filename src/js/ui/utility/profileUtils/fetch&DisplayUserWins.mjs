@@ -7,23 +7,21 @@ const singleEndpoint = getAuctionEndpoints();
 const token = sessionStorage.getItem("token");
 
 /**
- * Fetches and displays the user's auction wins. If no wins are found, a message is shown.
+ * Fetches and displays the user's auction wins.
  *
- * This function sends a GET request to retrieve the user's auction wins and updates the DOM with the results.
- * If no wins are found, a message is displayed indicating the user has no current wins.
+ * - Retrieves the user's data and token from sessionStorage.
+ * - Fetches the user's winning bids from the auction API.
+ * - Calls `generateAuctionCards` to render the winning bids on the page.
  *
  * @async
  * @function fetchAndDisplayOwnWins
- * @returns {void}
- * @throws {Error} If the API request fails, an error is logged to the console.
+ * @returns {Promise<void>} - The function doesn't return any value.
  */
 export async function fetchAndDisplayOwnWins() {
   try {
     const req = await handleApiRequest(singleEndpoint.AUCTION_SINGLE_WINS, optionGetAuctionInformation(token));
 
     generateAuctionCards(req.data, "winnings", "winner");
-
-    // generateWonAuctionCards(req.data, "winnings");
   } catch (error) {
     console.error("Error fetching and displaying own listings:", error);
   }

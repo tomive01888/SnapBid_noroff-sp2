@@ -1,5 +1,5 @@
-import { onLogin } from "../../ui/utility/account/login.mjs";
-import { onRegister } from "../../ui/utility/account/register.mjs";
+import { onLogin } from "../../ui/utility/accountUtils/login.mjs";
+import { onRegister } from "../../ui/utility/accountUtils/register.mjs";
 
 const formLoginClick = document.forms.loginForm;
 formLoginClick.addEventListener("submit", (event) => {

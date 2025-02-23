@@ -16,20 +16,12 @@ const accessToken = sessionStorage.getItem("token");
  * @returns {Object | undefined} The auction profile information if the request is successful, otherwise `undefined`.
  * @throws {Error} If the API request fails, an error is logged to the console.
  */
-export async function fetchAuctionProfileInfo() {
-  const userString = JSON.parse(sessionStorage.getItem("SnapBid-User"));
-
-  if (!userString) {
-    console.error("No user found in sessionStorage");
-    return;
-  }
-
+export async function fetchAuctionProfileInfo(name, token) {
   try {
     const auctionUser = await handleApiRequest(
-      `${AUCTION_PROFILES_ENDPOINT}/${userString.name}`,
-      optionGetAuctionInformation(accessToken)
+      `${AUCTION_PROFILES_ENDPOINT}/${name}`,
+      optionGetAuctionInformation(token)
     );
-    console.log(auctionUser);
 
     if (auctionUser?.data) {
       const { credits, ...user } = auctionUser.data;

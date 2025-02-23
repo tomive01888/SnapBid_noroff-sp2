@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="head-profile">SnapBid | Profile</title>
-    <script type="module" src="../src/app.mjs"></script>
+    <script type="module" src="../../src/app.mjs"></script>
     <link rel="icon" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,7 +50,7 @@
             >
               <div id="profile-wrapper" class="hidden gap-2">
                 <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
-                <p id="username" class="text-xl text-white md:text-sm">User_test_192837</p>
+                <p id="username" class="text-xl text-white md:text-sm">Guest</p>
               </div>
 
               <div id="wallet-wrapper" class="border max-w-3xs rounded-sm md:border-none md:w-fit">
@@ -60,35 +60,10 @@
               </div>
             </div>
 
-            <nav class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1">
-              <a
-                href="/"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >Home</a
-              >
-              <button
-                id="profile-link"
-                class="bg-blue-500 hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md"
-              >
-                My profile
-              </button>
-
-              <a
-                href="../auth/index.html"
-                id="account-button"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 md:border-1 border-blue-700 md:rounded-md md:hover:bg-blue-400/30 transition-colors duration-500"
-                >Account</a
-              >
-
-              <button
-                type="button"
-                id="logout"
-                onclick="logoutListener()"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-              >
-                Logout
-              </button>
-            </nav>
+            <nav
+              id="navbar"
+              class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1"
+            ></nav>
           </div>
         </div>
       </div>
@@ -108,7 +83,7 @@
           </h1>
           <div class="flex gap-4 mt-8">
             <p class="text-xl">My wallet:</p>
-            <p id="userProfileCurrency" class="select-none text-xl font-semibold"></p>
+            <p id="userProfileCurrency" class="select-none text-xl font-semibold">0$</p>
           </div>
           <button
             type="button"
@@ -124,100 +99,86 @@
         class="hidden mt-4 p-2 w-full max-w-[40rem] border-1 bg-white rounded-md shadow-lg"
       >
         <form class="flex flex-wrap gap-2" name="updateProfile">
-          <label for="avatar-url" class="w-full">You can change avatar here:</label
-          ><input id="avatar-url" type="text" class="w-[83%] border-1 border-gray-500 rounded-sm p-1" />
+          <label for="avatar-url" class="w-full text-lg">Change avatar:</label
+          ><input
+            id="avatar-url"
+            type="text"
+            class="flex-grow border-1 border-gray-500 rounded-sm p-1 font-body"
+            placeholder="Insert valid image url"
+            aria-label="Image url must be valid and max 300 characters long"
+          />
           <button type="submit" class="py-1 px-2 bg-blue-500 text-white rounded-sm">Change</button>
         </form>
       </div>
+
       <div class="flex gap-1 mb-1 w-full max-w-[40rem] justify-center mt-8">
-        <!-- My Listings -->
-        <div class="w-fit sm:w-full">
-          <input type="radio" name="auctionView" value="myListings" id="myListings" class="peer hidden" checked />
-          <label
-            for="myListings"
-            class="bg-white cursor-pointer w-18 flex flex-col text-sm sm:w-full border rounded-md p-1 text-center peer-checked:bg-blue-500 peer-checked:hover:bg-blue-500 peer-checked:text-white hover:bg-blue-500/20"
-          >
-            My <span class="break-words">Listings</span>
-          </label>
-        </div>
-
-        <!-- My Bids -->
-        <div class="w-fit sm:w-full">
-          <input type="radio" name="auctionView" value="myBids" id="myBids" class="peer hidden" />
-          <label
-            for="myBids"
-            class="bg-white cursor-pointer w-18 flex flex-col text-sm sm:w-full border rounded-md p-1 text-center peer-checked:bg-blue-500 peer-checked:hover:bg-blue-500 peer-checked:text-white hover:bg-blue-500/20"
-          >
-            My <span class="break-words">Biddings </span></label
-          >
-        </div>
-
-        <!-- My Wins -->
-        <div class="w-fit sm:w-full">
-          <input type="radio" name="auctionView" value="myWins" id="myWins" class="peer hidden" />
-          <label
-            for="myWins"
-            class="bg-white cursor-pointer w-18 flex flex-col text-sm sm:w-full border rounded-md p-1 text-center peer-checked:bg-blue-500 peer-checked:hover:bg-blue-500 peer-checked:text-white hover:bg-blue-500/20"
-          >
-            My <span class="break-words">Winnings</span>
-          </label>
-        </div>
-
-        <!-- Create Listing -->
-        <div class="w-fit sm:w-full">
-          <input type="radio" name="auctionView" value="create" id="createListing" class="peer hidden" />
-          <label
-            for="createListing"
-            class="bg-white cursor-pointer w-18 flex flex-col text-sm sm:w-full border rounded-md p-1 text-center peer-checked:bg-blue-500 peer-checked:hover:bg-blue-500 peer-checked:text-white hover:bg-blue-500/20"
-          >
-            Create<span class="break-words">Listing</span>
-          </label>
-        </div>
+        <ul class="flex w-full gap-4">
+          <li class="w-full">
+            <a
+              href="../listing/index.html"
+              type="button"
+              class="cursor-pointer w-18 flex flex-col text-lg sm:w-full border rounded-md p-1 text-center bg-white hover:bg-blue-500/20"
+            >
+              My list
+            </a>
+          </li>
+          <li class="w-full">
+            <button
+              type="button"
+              class="w-18 flex flex-col text-lg sm:w-full border rounded-md p-1 text-center bg-blue-500 text-white"
+            >
+              My bids
+            </button>
+          </li>
+          <li class="w-full">
+            <a
+              href="../wins/index.html"
+              class="cursor-pointer w-18 flex flex-col text-lg sm:w-full border rounded-md p-1 text-center bg-white hover:bg-blue-500/20"
+              >My wins</a
+            >
+          </li>
+        </ul>
       </div>
 
-      <div class="mt-8 w-full max-w-2xl">
+      <div class="w-full">
         <div
-          id="listing"
-          class="content-container w-full max-w-2xl lg:max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-2 m-auto"
+          id="biddings"
+          class="w-full max-w-2xl lg:max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 min-h-[50svh] m-auto"
         >
           <div
             role="status"
-            class="w-full h-[24.345rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
+            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
           ></div>
           <div
             role="status"
-            class="w-full h-[24.345rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
+            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
+          ></div>
+          <div
+            role="status"
+            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
+          ></div>
+          <div
+            role="status"
+            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
+          ></div>
+          <div
+            role="status"
+            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
+          ></div>
+          <div
+            role="status"
+            class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
           ></div>
         </div>
-
-        <div id="biddings" class="content-container grid grid-col md:grid-cols-2 gap-4 w-full">
-          <div
-            role="status"
-            class="w-full h-[24.345rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[24.345rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-        </div>
-
-        <div id="winnings" class="content-container grid grid-col md:grid-cols-2 gap-4 w-full">
-          <div
-            role="status"
-            class="w-full h-[24.345rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-          <div
-            role="status"
-            class="w-full h-[24.345rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
-          ></div>
-        </div>
-
-        <div id="creating" class="content-container flex"></div>
+        <button id="loadMoreBids" class="hidden bg-blue-500 text-white px-4 py-2 rounded">Load More</button>
       </div>
     </main>
 
     <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
       <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <a href="/post/create/index.html" id="new-listing" class="hidden self-end text-lg text-white underline"
+          >Create a new listing</a
+        >
         <div>
           <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
           <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>

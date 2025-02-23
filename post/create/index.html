@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="head-title">SnapBid | Listing</title>
+    <script type="module" src="../../src/app.mjs"></script>
+    <link rel="icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Sans+Narrow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#F1F1F1]">
+    <header
+      class="sticky top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
+    >
+      <div class="w-full max-w-[76rem] flex">
+        <div class="flex w-full md:relative md:z-[999]">
+          <a id="logo-btn" href="/"
+            ><img
+              src="/snapbid_logo.png"
+              alt="Snap Bid Logo"
+              class="w-auto h-auto max-h-12 md:absolute md:-bottom-9 md:max-h-20"
+          /></a>
+        </div>
+        <label aria-label="Toggle mobile menu" for="ham-btn" class="md:hidden">
+          <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center scale-125">
+            <input class="hidden peer" type="checkbox" id="ham-btn" />
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]"
+            ></div>
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-md transition-all duration-300 origin-center peer-checked:hidden"
+            ></div>
+            <div
+              class="w-[50%] h-[2px] bg-white rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]"
+            ></div>
+          </div>
+        </label>
+        <div
+          id="burger-menu"
+          class="absolute top-[64px] left-0 min-h-svh w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
+        >
+          <div class="w-full mt-8 flex flex-col gap-8 items-center md:m-0">
+            <div
+              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:h-5"
+            >
+              <div id="profile-wrapper" class="hidden gap-2">
+                <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
+                <p id="username" class="text-xl text-white md:text-sm">Guest</p>
+              </div>
+
+              <div id="wallet-wrapper" class="hidden border max-w-3xs rounded-sm md:border-none md:w-fit">
+                <p class="text-xl text-white p-4 text-center md:p-0 md:text-sm">
+                  Wallet: <span id="credits" class="font-semibold">0</span>$
+                </p>
+              </div>
+            </div>
+
+            <nav
+              id="navbar"
+              class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1"
+            ></nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="min-h-svh">
+      <div
+        class="m-auto w-full max-w-[32rem] bg-white rounded-md p-4 md:p-8 md:max-w-[54rem] flex flex-col items-center gap-1 my-22"
+      >
+        <h1 class="place-self-start text-2xl sm:text-4xl font-bold my-4">Create a new listing</h1>
+
+        <div id="creating" class="content-container w-full">
+          <form name="createNewListing" id="auctionForm" class="w-full flex flex-col p-4 border rounded-lg bg-white">
+            <label for="title-input" class="text-sm">Title:</label>
+            <input id="title-input" type="text" name="title" maxlength="100" required class="border p-2 rounded" />
+
+            <label for="description-input" class="text-sm mt-4">Description:</label>
+            <textarea
+              id="description-input"
+              name="description"
+              maxlength="280"
+              rows="4"
+              class="border p-2 rounded min-h-36 max-h-72"
+            ></textarea>
+
+            <label for="category-input" class="text-sm mt-4">Category:</label>
+            <select id="category-input" name="category" class="border p-2 rounded">
+              <option value="">Select category</option>
+              <option value="Vacation">Vacation</option>
+              <option value="Art">Art</option>
+              <option value="Watches">Watches</option>
+              <option value="Jewelry">Jewelry</option>
+              <option value="Vintage">Vintage</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Cars">Cars</option>
+              <option value="Interiors">Interiors</option>
+              <option value="Souvenirs">Souvenirs</option>
+              <option value="Antiques">Antiques</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Decor">Decor</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Games">Games</option>
+              <option value="Books">Books</option>
+              <option value="Toys">Toys</option>
+              <option value="Sports">Sports</option>
+              <option value="Collectibles">Collectibles</option>
+            </select>
+
+            <label for="duration-input" class="text-sm mt-4">Duration:</label>
+            <select id="duration-input" name="duration" class="border p-2 rounded">
+              <option value="3">3 days</option>
+              <option value="7">7 days</option>
+              <option value="30">30 days</option>
+              <option value="60">60 days</option>
+            </select>
+
+            <p for="media-inputs-container" class="mt-4">Media:</p>
+            <div id="media-inputs-container" class="flex flex-col gap-1 mt-4">
+              <div class="flex items-center gap-2">
+                <input type="text" name="media[]" placeholder="Add media url" class="border p-2 rounded flex-grow" />
+              </div>
+            </div>
+
+            <button type="button" class="flex cursor-pointer gap-2 disabled:opacity-50 mt-4" id="add-media-btn">
+              <div class="w-6 h-6 border-3 border-blue-400 rounded-full relative flex items-center justify-center">
+                <span class="absolute w-3 h-1 bg-blue-400 rounded"></span>
+                <span class="absolute h-3 w-1 bg-blue-400 rounded"></span>
+              </div>
+              <p class="text-blue-400">Add more media</p>
+            </button>
+
+            <button type="submit" class="bg-green-500 text-white p-2 rounded mt-4" id="submit-btn">
+              Submit
+              <div
+                id="loader"
+                class="hidden w-6 h-6 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin m-auto"
+              ></div>
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
+      <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <button type="button" id="new-listing" class="hidden self-end text-lg text-white underline">
+          Create a new listing
+        </button>
+        <div>
+          <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
+          <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

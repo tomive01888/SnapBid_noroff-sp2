@@ -44,8 +44,6 @@ export async function postNewListing() {
     endsAt: endsAt.toISOString(),
   };
 
-  console.log(AUCTION_LISTING_ENDPOINT);
-
   try {
     const req = await handleApiRequest(AUCTION_LISTING_ENDPOINT, optionPost(listingsData, token));
 

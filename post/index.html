@@ -60,35 +60,10 @@
               </div>
             </div>
 
-            <nav class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1">
-              <a
-                href="/"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >Home</a
-              >
-              <a
-                id="profile-link"
-                href="../profile/index.html"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >My profile</a
-              >
-
-              <a
-                href="../auth/index.html"
-                id="account-button"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-                >Account</a
-              >
-
-              <button
-                type="button"
-                id="logout"
-                onclick="logoutListener()"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500"
-              >
-                Logout
-              </button>
-            </nav>
+            <nav
+              id="navbar"
+              class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1"
+            ></nav>
           </div>
         </div>
       </div>
@@ -224,6 +199,9 @@
 
     <footer class="bg-blue-600 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full p-8">
       <div class="w-full max-w-[76rem] flex m-auto flex-col gap-12">
+        <a href="/post/create/index.html" id="new-listing" class="hidden self-end text-lg text-white underline"
+          >Create a new listing</a
+        >
         <div>
           <img src="/snapbid_logo.png" alt="SnapBid Logo" class="w-auto h-auto max-h-12 opacity-75" />
           <p class="text-white">Copyright © 2000-2025 SnapBid inc. All rights reserved.</p>

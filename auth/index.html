@@ -50,7 +50,7 @@
             >
               <div id="profile-wrapper" class="hidden gap-2">
                 <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
-                <p id="username" class="text-xl text-white md:text-sm">User_test_192837</p>
+                <p id="username" class="text-xl text-white md:text-sm">Guest</p>
               </div>
 
               <div id="wallet-wrapper" class="hidden border max-w-3xs rounded-sm md:border-none md:w-fit">
@@ -60,35 +60,10 @@
               </div>
             </div>
 
-            <nav class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1">
-              <a
-                href="/"
-                class="bg-blue-600 cursor-pointer text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
-                >Home</a
-              >
-              <a
-                id="profile-link"
-                href="../profile/index.html"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
-                >My profile</a
-              >
-
-              <a
-                href="./auth/index.html"
-                id="account-button"
-                class="bg-blue-500 cursor-pointer text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
-                >Account</a
-              >
-
-              <button
-                type="button"
-                id="logout"
-                onclick="logoutListener()"
-                class="bg-blue-600 cursor-pointer hidden text-xl text-white text-center w-36 md:border-1 md:border-blue-700 md:rounded-md md:hover:bg-blue-400/60 md:transition-colors md:duration-500"
-              >
-                Logout
-              </button>
-            </nav>
+            <nav
+              id="navbar"
+              class="flex flex-col justify-end align-start gap-8 w-full items-center md:flex-row md:p-1"
+            ></nav>
           </div>
         </div>
       </div>
