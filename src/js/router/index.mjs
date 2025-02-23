@@ -12,8 +12,8 @@
  * router("/");
  *
  * @example
- * // Load the profile page view
- * router("/profile/index.html");
+ * // Load the post page view
+ * router("/post/index.html");
  */
 export default async function router(pathname = window.location.pathname) {
   switch (true) {

@@ -11,10 +11,11 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "./index.html"),
         auth: resolve(__dirname, "./auth/index.html"),
-        profile: resolve(__dirname, "./profile/index.html"),
+        profileWins: resolve(__dirname, "./profile/wins/index.html"),
+        profileBids: resolve(__dirname, "./profile/bids/index.html"),
+        profileList: resolve(__dirname, "./profile/listing/index.html"),
         post: resolve(__dirname, "./post/index.html"),
       },
-    
     },
   },
   plugins: [tailwindcss()],
