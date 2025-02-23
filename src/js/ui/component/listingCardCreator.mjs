@@ -1,5 +1,5 @@
 import { getHighestBidValue } from "../utility/getHighestBidHandler.mjs";
-import { getListingData } from "../utility/singleListingutils/fetchListingData.mjs";
+// import { getListingData } from "../utility/singleListingUtils/fetchListingData.mjs";
 import { getTimeRemaining } from "../utility/timeRemaining.mjs";
 let debounceTimeout;
 /**
@@ -239,7 +239,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
  * @param {HTMLElement} overlay - The price element to show the result.
  */
 async function checkLeadingStatus(listingId, myBid, overlay) {
-  const singleData = await getListingData(listingId);
+  // const singleData = await getListingData(listingId);
   const highestBid = getHighestBidValue(singleData);
 
   const overlayDiv = document.createElement("div");
