@@ -15,6 +15,10 @@ export function compareUserAccess() {
   const userName = JSON.parse(sessionStorage.getItem("SnapBid-User"));
 
   if (token) {
+    document.getElementById("profile-wrapper").classList.remove("hidden");
+    document.getElementById("profile-wrapper").classList.add("flex");
+    document.getElementById("wallet-wrapper").classList.remove("hidden");
+    document.getElementById("new-listing").classList.remove("hidden");
     document.getElementById("username").textContent = userName.name;
     document.getElementById("credits").textContent = userCredit;
   }

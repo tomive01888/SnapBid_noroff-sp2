@@ -15,7 +15,7 @@
   </head>
   <body class="bg-[#F1F1F1]">
     <header
-      class="sticky top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
+      class="sticky h-14 top-0 bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] w-full flex justify-center align-center p-2 z-[999]"
     >
       <div class="w-full max-w-[76rem] flex">
         <div class="flex w-full md:relative md:z-[999]">
@@ -23,7 +23,7 @@
             ><img
               src="/snapbid_logo.png"
               alt="Snap Bid Logo"
-              class="w-auto h-auto max-h-12 md:absolute md:-bottom-9 md:max-h-20"
+              class="w-auto h-auto max-h-12 md:absolute md:-bottom-11 md:max-h-22 transform-width duration-300"
           /></a>
         </div>
         <label aria-label="Toggle mobile menu" for="ham-btn" class="md:hidden">
@@ -42,15 +42,16 @@
         </label>
         <div
           id="burger-menu"
-          class="absolute top-[64px] left-0 min-h-svh w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
+          class="absolute top-[56px] left-0 min-h-svh w-full bg-[radial-gradient(circle,_rgba(8,94,255,1)_9%,_rgba(3,72,201,1)_88%)] border-t-1 border-black hidden md:flex md:static md:min-h-auto md:place-content-center md:bg-none md:border-none md:m-0"
         >
           <div class="w-full mt-8 flex flex-col gap-8 items-center md:m-0">
             <div
-              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:h-5"
+              class="flex flex-col gap-8 md:absolute md:top-[53px] md:left-0 md:flex-row md:w-full md:bg-gray-500 md:justify-center md:items-center md:h-7"
             >
               <div id="profile-wrapper" class="hidden gap-2">
-                <p class="text-xl text-white md:text-sm opacity-70">Logged in as:</p>
-                <p id="username" class="text-xl text-white md:text-sm">Guest</p>
+                <p class="text-xl text-white/70 md:text-sm">
+                  Logged in as: <span id="username" class="text-xl text-white md:text-sm">Guest</span>
+                </p>
               </div>
 
               <div id="wallet-wrapper" class="border max-w-3xs rounded-sm md:border-none md:w-fit">
@@ -111,13 +112,13 @@
         </form>
       </div>
 
-      <div class="flex gap-1 mb-1 w-full max-w-[40rem] justify-center mt-8">
-        <ul class="flex w-full gap-4">
+      <div class="flex gap-1 mb-1 w-full max-w-[40rem] justify-center mt-4">
+        <ul class="flex w-full gap-2 md:gap-4">
           <li class="w-full">
             <a
               href="../listing/index.html"
               type="button"
-              class="cursor-pointer w-18 flex flex-col text-lg sm:w-full border rounded-md p-1 text-center bg-white hover:bg-blue-500/20"
+              class="cursor-pointer flex flex-col text-lg w-full border rounded-md p-1 text-center bg-white hover:bg-blue-500/20"
             >
               My list
             </a>
@@ -125,7 +126,7 @@
           <li class="w-full">
             <button
               type="button"
-              class="w-18 flex flex-col text-lg sm:w-full border rounded-md p-1 text-center bg-blue-500 text-white"
+              class="flex flex-col text-lg w-full border rounded-md p-1 text-center bg-blue-500 text-white"
             >
               My bids
             </button>
@@ -133,7 +134,7 @@
           <li class="w-full">
             <a
               href="../wins/index.html"
-              class="cursor-pointer w-18 flex flex-col text-lg sm:w-full border rounded-md p-1 text-center bg-white hover:bg-blue-500/20"
+              class="cursor-pointer flex flex-col text-lg w-full border rounded-md p-1 text-center bg-white hover:bg-blue-500/20"
               >My wins</a
             >
           </li>

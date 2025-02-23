@@ -1,4 +1,3 @@
-import { logoutListener } from "../../ui/globals/logoutHandling.mjs";
 import { fetchAndDisplayOwnListings } from "../../ui/utility/profileUtils/fetch&DisplayUserListings.mjs";
 import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
@@ -10,7 +9,6 @@ import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 
 generateNavbar();
 authGuard();
-window.logoutListener = logoutListener;
 hamburgerToggle();
 compareUserAccess();
 fetchAndDisplayOwnListings();

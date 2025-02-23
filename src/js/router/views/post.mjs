@@ -4,7 +4,6 @@ import { openBidModal } from "../../ui/component/openModalBid.mjs";
 import { openDeleteModal } from "../../ui/component/openModalDelete.mjs";
 import { openModalUpdateListing } from "../../ui/component/openModalUpdateListing.mjs";
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
-import { logoutListener } from "../../ui/globals/logoutHandling.mjs";
 import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
 import { getHighestBidValue } from "../../ui/utility/getHighestBidHandler.mjs";
 import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
@@ -13,10 +12,9 @@ import { showBidHistory } from "../../ui/utility/singleListingUtils/showBidHisto
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 import { getListingData } from "../../ui/utility/singleListingutils/fetchListingData.mjs";
 
+compareUserAccess();
 generateNavbar();
 hamburgerToggle();
-compareUserAccess();
-window.logoutListener = logoutListener;
 
 const urlSearch = new URLSearchParams(window.location.search);
 const listId = urlSearch.get("listing_id");
@@ -44,7 +42,7 @@ activateSingleListing();
 
 const { highestBidName } = getHighestBidValue(listingData);
 const user = JSON.parse(sessionStorage.getItem("SnapBid-User")) || null;
-if (user && highestBidName === user.name) {
+if (highestBidName === user.name) {
   bidNowButton.disabled = true;
 } else {
   bidNowButton.addEventListener("click", () => {

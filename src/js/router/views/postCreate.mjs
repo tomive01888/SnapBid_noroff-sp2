@@ -1,5 +1,4 @@
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
-import { logoutListener } from "../../ui/globals/logoutHandling.mjs";
 import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
 import { authGuard } from "../../ui/utility/authGuard.mjs";
 import { postNewListing } from "../../ui/utility/profileUtils/createNewListing.mjs";
@@ -9,7 +8,6 @@ generateNavbar();
 authGuard();
 hamburgerToggle();
 compareUserAccess();
-window.logoutListener = logoutListener;
 
 const form = document.forms.createNewListing;
 form.addEventListener("submit", async (event) => {
@@ -33,6 +31,10 @@ form.addEventListener("submit", async (event) => {
     submitBtn.textContent = "Submit";
   }
 });
+
+if (!sessionStorage.getItem("fresh-listing") === true) {
+  console.log("LOOOL");
+}
 
 let mediaCount = 1;
 const maxMediaCount = 8;
