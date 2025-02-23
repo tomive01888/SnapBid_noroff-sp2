@@ -10,7 +10,7 @@ import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
 import { showMoreListingsFromSeller } from "../../ui/utility/singleListingUtils/showMoreListings.mjs";
 import { showBidHistory } from "../../ui/utility/singleListingUtils/showBidHistory.mjs";
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
-// import { getListingData } from "../../ui/utility/singleListingUtils/fetchListingData.mjs";
+import { getListingData } from "../../ui/utility/singleListingUtils/fetchListingData.mjs";
 
 compareUserAccess();
 generateNavbar();
@@ -18,7 +18,7 @@ hamburgerToggle();
 
 const urlSearch = new URLSearchParams(window.location.search);
 const listId = urlSearch.get("listing_id");
-// const listingData = await getListingData(listId);
+const listingData = await getListingData(listId);
 const bidNowButton = document.getElementById("bid-now");
 
 showMoreListingsFromSeller(listingData, listId);
