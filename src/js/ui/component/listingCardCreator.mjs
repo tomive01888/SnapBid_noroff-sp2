@@ -81,7 +81,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
 
     const img = document.createElement("img");
     if (appendContainer === "biddings") {
-      img.className = listing.media[0] ? "object-cover object-center w-auto h-full" : "opacity-40 place-self-center";
+      img.className = listing.media[0] ? "w-full h-full object-cover object-center" : "opacity-40 place-self-center";
       img.src = listing.media[0] ? listing.media[0].url : "/snapbid_logo.png";
       img.alt = listing.title || "";
     } else {
