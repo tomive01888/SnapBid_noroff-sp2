@@ -23,7 +23,7 @@ export function createImageGallery(containerId, mediaArray) {
   let currentIndex = 0;
 
   const mainDisplay = document.createElement("div");
-  mainDisplay.className = "w-full max-w-400 aspect-[1/1] flex justify-center mb-4 m-auto relative";
+  mainDisplay.className = "w-full max-w-400h-full max-h-400 aspect-[1/1] flex justify-center mb-4 m-auto relative";
 
   const activeImg = document.createElement("img");
   activeImg.id = "activeImg";
