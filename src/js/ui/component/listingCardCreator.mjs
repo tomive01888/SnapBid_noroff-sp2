@@ -85,7 +85,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
       img.src = listing.media[0] ? listing.media[0].url : "/snapbid_logo.png";
       img.alt = listing.title || "";
     } else {
-      img.className = media[0] ? "object-cover object-center w-auto h-full" : "opacity-40 place-self-center";
+      img.className = media[0] ? "w-full h-full  object-cover object-center" : "opacity-40 place-self-center";
       img.src = media[0] ? media[0].url : "/snapbid_logo.png";
       img.alt = title || "";
     }
