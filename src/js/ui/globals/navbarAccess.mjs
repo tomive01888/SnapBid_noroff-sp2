@@ -18,7 +18,7 @@ export function generateNavbar() {
   if (token) {
     ["New Listing", "My Profile"].forEach((text, index) => {
       const btn = document.createElement("a");
-      btn.href = index === 0 ? "/post/create/index.html" : "/profile/listing/index.html"; // Assign correct URL
+      btn.href = index === 0 ? "/post/create/index.html" : "/profile/listing/index.html";
       btn.textContent = text;
       btn.className =
         "cursor-pointer text-xl text-white text-center w-28 px-2 py-1 border-1 border-blue-700 rounded-md transition-colors duration-500 " +

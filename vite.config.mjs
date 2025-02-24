@@ -15,6 +15,7 @@ export default defineConfig({
         profileBids: resolve(__dirname, "./profile/bids/index.html"),
         profileList: resolve(__dirname, "./profile/listing/index.html"),
         post: resolve(__dirname, "./post/index.html"),
+        postCreate: resolve(__dirname, "./post/create/index.html"),
       },
     },
   },
