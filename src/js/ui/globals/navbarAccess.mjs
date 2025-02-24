@@ -1,53 +1,66 @@
 /**
  * Generates the navigation bar with active states based on the current route.
- * The navbar contains links to "Home", "Account", or "My Profile" and a "Logout" button when the user is authenticated.
+ * The navbar contains links to "Home", "New Listing", "My Profile", and a dynamic "Login/Logout" button based on authentication status.
  *
- * @returns {HTMLElement} The navbar element with its corresponding buttons
+ * @returns {HTMLElement} The navbar element with its corresponding buttons.
  */
 export function generateNavbar() {
   const nav = document.getElementById("navbar");
   nav.innerHTML = "";
 
   const currentPath = window.location.pathname;
+  const token = sessionStorage.getItem("token");
 
-  const isAuth = currentPath.startsWith("/auth/");
+  const isHome = currentPath === "/" || (currentPath === "/index.html" && currentPath !== "/");
   const isProfile = currentPath.startsWith("/profile/");
-  const isHome = !isAuth && !isProfile && (currentPath === "/" || currentPath.endsWith("/index.html"));
+  const isAuth = currentPath.startsWith("/auth/");
 
-  function createNavButton(text, href, isActive) {
-    const btn = document.createElement("a");
-    btn.href = href;
-    btn.textContent = text;
-    btn.className =
-      "cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md transition-colors duration-500 " +
-      (isActive ? "bg-blue-500 pointer-events-none" : "bg-blue-600 hover:bg-blue-400/30");
+  if (token) {
+    ["New Listing", "My Profile"].forEach((text, index) => {
+      const btn = document.createElement("a");
+      btn.href = index === 0 ? "/post/create/index.html" : "/profile/listing/index.html"; // Assign correct URL
+      btn.textContent = text;
+      btn.className =
+        "cursor-pointer text-xl text-white text-center w-28 px-2 py-1 border-1 border-blue-700 rounded-md transition-colors duration-500 " +
+        ((index === 0 && currentPath.startsWith("/post/create/")) || (index === 1 && isProfile)
+          ? "bg-blue-500 pointer-events-none"
+          : "bg-blue-600 hover:bg-blue-400/40");
 
-    return btn;
+      nav.appendChild(btn);
+    });
   }
 
-  const homeBtn = createNavButton("Home", "/", isHome);
+  const homeBtn = document.createElement("a");
+  homeBtn.href = "/";
+  homeBtn.textContent = "Home";
+  homeBtn.className =
+    "cursor-pointer text-xl text-white text-center w-28 px-2 py-1 border-1 border-blue-700 rounded-md transition-colors duration-500 " +
+    (isHome ? "bg-blue-500 pointer-events-none" : "bg-blue-600 hover:bg-blue-400/40");
   nav.appendChild(homeBtn);
 
-  if (!sessionStorage.getItem("token")) {
-    const accountBtn = createNavButton("Account", "/auth/index.html", isAuth);
-    nav.appendChild(accountBtn);
-  } else {
-    const profileBtn = createNavButton("My Profile", "/profile/listing/index.html", isProfile);
-    nav.appendChild(profileBtn);
+  const authBtn = document.createElement("a");
+  authBtn.href = token ? "#" : "/auth/index.html";
+  authBtn.textContent = token ? "Logout" : "Login";
+  authBtn.className =
+    "cursor-pointer text-2xl font-custom text-white text-center w-26 border-1 rounded-full transition-colors duration-500 " +
+    (token
+      ? "bg-red-500 border-red-700 hover:bg-red-400/30"
+      : isAuth
+      ? "bg-blue-500 pointer-events-none"
+      : "bg-green-500 border-green-700 hover:bg-green-400/30");
 
-    const logoutBtn = document.createElement("button");
-    logoutBtn.type = "button";
-    logoutBtn.textContent = "Logout";
-    logoutBtn.className =
-      "bg-blue-600 cursor-pointer text-xl text-white text-center w-36 border-1 border-blue-700 rounded-md hover:bg-blue-400/30 transition-colors duration-500";
-    logoutBtn.addEventListener("click", logoutEvent);
-
-    nav.appendChild(logoutBtn);
+  if (token) {
+    authBtn.addEventListener("click", logoutEvent);
   }
+
+  nav.appendChild(authBtn);
 
   return nav;
 }
 
+/**
+ * Logs out the user by clearing session storage and redirecting to the homepage.
+ */
 function logoutEvent() {
   localStorage.setItem("logged-out", true);
   sessionStorage.clear();

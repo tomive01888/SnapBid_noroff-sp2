@@ -5,6 +5,7 @@
 @theme {
   --font-header: "Montserrat", serif;
   --font-body: "PT Sans Narrow", serif;
+  --font-custom: "Oleo Script Swash Caps", serif;
 }
 
 @layer components {
@@ -26,5 +27,4 @@
   select {
     @apply font-body;
   }
-
 }
