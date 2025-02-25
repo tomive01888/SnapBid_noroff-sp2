@@ -18,6 +18,7 @@ form.addEventListener("submit", async (event) => {
   submitBtn.disabled = true;
   submitBtn.innerHTML = "";
   loader.classList.remove("hidden");
+  loader.classList.add("inline-block");
   submitBtn.appendChild(loader);
 
   try {
@@ -27,6 +28,7 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
   } finally {
     submitBtn.disabled = false;
+    loader.classList.remove("inline-block");
     loader.classList.add("hidden");
     submitBtn.textContent = "Submit";
   }
@@ -46,11 +48,13 @@ addMediaBtn.addEventListener("click", () => {
 
     const input = document.createElement("input");
     input.type = "text";
+    input.ariaLabel = "add extra media input";
     input.name = "media[]";
     input.placeholder = "Add media url";
     input.className = "border p-2 rounded flex-grow";
 
     const removeBtn = document.createElement("button");
+    removeBtn.ariaLabel = "remove media input";
     removeBtn.type = "button";
     removeBtn.className =
       "cursor-pointer w-6 h-6 border-3 border-red-400 rounded-full ml-2 grid place-items-center relative";

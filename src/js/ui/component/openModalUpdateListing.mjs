@@ -236,7 +236,7 @@ export async function openModalUpdateListing(id, data) {
 
     const input = document.createElement("input");
     input.type = "text";
-    input.ariaLabel = "extra media input";
+    input.ariaLabel = "add extra media input";
     input.value = url;
     input.placeholder = "Add media url";
     input.className = "border p-2 rounded flex-grow";
