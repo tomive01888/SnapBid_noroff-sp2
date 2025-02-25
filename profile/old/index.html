@@ -81,7 +81,7 @@
           </h1>
           <div class="flex gap-4 mt-8">
             <p class="text-xl">My wallet:</p>
-            <p id="userProfileCurrency" class="select-none text-xl font-semibold"></p>
+            <p id="userProfileCurrency" class="select-none text-xl font-semibold">0$</p>
           </div>
           <button
             type="button"
@@ -101,7 +101,7 @@
           ><input
             id="avatar-url"
             type="text"
-            class="w-[83%] border-1 border-gray-500 rounded-sm p-1 font-body"
+            class="flex-grow border-1 border-gray-500 rounded-sm p-1 font-body"
             placeholder="Insert valid image url"
             aria-label="Image url must be valid and max 300 characters long"
           />
@@ -112,16 +112,17 @@
       <div class="flex gap-1 mb-1 w-full max-w-[40rem] justify-center mt-4">
         <ul class="flex w-full gap-2 md:gap-4">
           <li class="w-full">
-            <button type="button" class="w-full border rounded-md text-lg p-1 text-center bg-blue-500 text-white">
+            <a
+              href="../listing/index.html"
+              class="cursor-pointer text-lg border rounded-md p-1 flex flex-grow justify-center bg-white hover:bg-blue-500/20"
+            >
               My list
-            </button>
+            </a>
           </li>
           <li class="w-full">
-            <a
-              href="../bids/index.html"
-              class="cursor-pointer text-lg border rounded-md p-1 flex flex-grow justify-center bg-white hover:bg-blue-500/20"
-              >My bids</a
-            >
+            <button type="button" class="w-full border rounded-md text-lg p-1 text-center bg-blue-500 text-white">
+              My bids
+            </button>
           </li>
           <li class="w-full">
             <a
@@ -130,19 +131,11 @@
               >My wins</a
             >
           </li>
-          <li class="w-full">
-            <a
-              href="../old/index.html"
-              class="cursor-pointer text-lg border rounded-md p-1 flex flex-grow justify-center bg-white hover:bg-blue-500/20"
-              >Old list</a
-            >
-          </li>
         </ul>
       </div>
 
-      <div class="w-full mb-48">
-        <div
-          id="listing"
+      <div class="w-full mb-48">        <div
+          id="biddings"
           class="w-full max-w-2xl lg:max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 min-h-[50svh] m-auto"
         >
           <div
@@ -170,6 +163,7 @@
             class="w-full h-[29rem] rounded-md bg-gray-100 border-gray-300 border-1 shadow-md animate-pulse"
           ></div>
         </div>
+        <button id="loadMoreBids" class="hidden bg-blue-500 text-white px-4 py-2 rounded">Load More</button>
       </div>
     </main>
 

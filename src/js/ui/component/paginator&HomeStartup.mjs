@@ -73,8 +73,7 @@ export async function initializeHome(showInactive, page = 1) {
       return meta;
     }
 
-    const paginatedData = data.slice(0, 12);
-    generateAuctionCards(paginatedData, "listings-container");
+    generateAuctionCards(response.data, "listings-container");
     return meta;
   } catch (error) {
     console.error("Something went wrong:", error);
