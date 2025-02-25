@@ -1,8 +1,15 @@
 import { getHighestBidValue } from "../getHighestBidHandler.mjs";
 import { getTimeRemaining } from "../timeRemaining.mjs";
 
-export function populateListingDetails(arr) {
-  const hasEnded = getTimeRemaining(arr.endsAt);
+/**
+ * Populates an auction listing's details on the webpage.
+ *
+ * @param {Object} listing - The auction listing object containing relevant details.
+ * Targets objects in DOM, <p> and ended banner to showcase listing has finished.
+ *
+ */
+export function populateListingDetails(listing) {
+  const hasEnded = getTimeRemaining(listing.endsAt);
   if (hasEnded === "Ended") {
     document.getElementById("bid-now").disabled = true;
     const listingContainer = document.getElementById("listing-container");
@@ -14,24 +21,24 @@ export function populateListingDetails(arr) {
     listingContainer.prepend(endedContainer);
   }
 
-  document.getElementById("post-title").textContent = arr.title;
+  document.getElementById("post-title").textContent = listing.title;
 
-  const { highestBid } = getHighestBidValue(arr);
+  const { highestBid } = getHighestBidValue(listing);
   document.getElementById("price").textContent = `${highestBid}$`;
 
-  const timeRemaining = getTimeRemaining(arr.endsAt);
+  const timeRemaining = getTimeRemaining(listing.endsAt);
   document.getElementById("time").textContent = timeRemaining;
 
-  document.getElementById("category-tag").textContent = arr.tags.length ? arr.tags[0] : "No category";
+  document.getElementById("category-tag").textContent = listing.tags.length ? listing.tags[0] : "No category";
 
-  document.getElementById("bid-amount").textContent = `${arr._count.bids} bids`;
+  document.getElementById("bid-amount").textContent = `${listing._count.bids} bids`;
 
-  document.getElementById("description").innerHTML = arr.description
-    ? arr.description.replace(/\n/g, "<br>")
+  document.getElementById("description").innerHTML = listing.description
+    ? listing.description.replace(/\n/g, "<br>")
     : "This listing has no description";
 
-  document.getElementById("avatar").src = arr.seller.avatar.url;
-  document.getElementById("avatar").alt = arr.seller.avatar.alt || "Seller Avatar";
+  document.getElementById("avatar").src = listing.seller.avatar.url;
+  document.getElementById("avatar").alt = listing.seller.avatar.alt || "Seller Avatar";
 
-  document.getElementById("seller-name").textContent = arr.seller.name;
+  document.getElementById("seller-name").textContent = listing.seller.name;
 }

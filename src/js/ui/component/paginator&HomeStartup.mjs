@@ -73,8 +73,6 @@ export async function initializeHome(showInactive, page = 1) {
       return meta;
     }
 
-    console.log("home", data, meta);
-
     const paginatedData = data.slice(0, 12);
     generateAuctionCards(paginatedData, "listings-container");
     return meta;

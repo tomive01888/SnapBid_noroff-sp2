@@ -56,6 +56,5 @@ export async function fetchFilteredListingsCaseInsensitive(tag, currentPage, act
     pageCount: totalPages,
   };
 
-  console.log("Updated Pagination Meta:", updatedMeta);
   return { data: paginatedMergedData, meta: updatedMeta };
 }

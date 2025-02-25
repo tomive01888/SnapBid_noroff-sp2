@@ -20,10 +20,10 @@ const urlSearch = new URLSearchParams(window.location.search);
 const listId = urlSearch.get("listing_id");
 const listingData = await getListingData(listId);
 const bidNowButton = document.getElementById("bid-now");
+document.getElementById("head-title").textContent = `SnapBid | ${listingData.title}`;
 
 showMoreListingsFromSeller(listingData, listId);
 showBidHistory(listingData);
-console.log(listingData);
 
 if (!sessionStorage.token) {
   bidNowButton.disabled = true;
@@ -61,8 +61,6 @@ document.getElementById("delete").addEventListener("click", () => {
 document.getElementById("edit").addEventListener("click", () => {
   openModalUpdateListing(listId, listingData);
 });
-
-document.getElementById("head-title").textContent = `SnapBid | ${listingData.title}`;
 
 if (!sessionStorage.bidSuccess === false) {
   showToastMessage("Bid successfully placed", "success");

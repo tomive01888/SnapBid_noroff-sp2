@@ -22,7 +22,5 @@ export async function fetchSearchResults(searchQuery, currentPage) {
   const endpoint = `${AUCTION_LISTING_ENDPOINT}/search`;
   const url = `${endpoint}?${params.toString()}`;
 
-  console.log("search url", url);
-
   return await handleApiRequest(url, optionGet);
 }

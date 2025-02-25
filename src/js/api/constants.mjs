@@ -35,7 +35,6 @@ export function getAuctionEndpoints() {
       AUCTION_SINGLE_BIDS: `${AUCTION_PROFILES_ENDPOINT + "/" + userName.name + "/bids?_listings=true&_bids=true"}`,
     };
   } else {
-    console.log("No user data available");
     return {};
   }
 }

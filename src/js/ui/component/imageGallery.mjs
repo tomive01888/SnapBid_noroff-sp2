@@ -75,8 +75,6 @@ export function createImageGallery(containerId, mediaArray) {
   imageGallery.id = "imageGallery";
 
   if (mediaArray.length === 0) {
-    console.log("zero");
-
     const img = document.createElement("img");
     img.src = "/snapbid_logo.png";
     img.alt = "snapbid_logo";

@@ -1,18 +1,10 @@
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 import { onLogin } from "../../ui/utility/accountUtils/login.mjs";
 import { onRegister } from "../../ui/utility/accountUtils/register.mjs";
+import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
 
 generateNavbar();
-
-const formLoginClick = document.forms.loginForm;
-formLoginClick.addEventListener("submit", (event) => {
-  onLogin(event);
-});
-
-const formRegisterClick = document.forms.registerForm;
-formRegisterClick.addEventListener("submit", (event) => {
-  onRegister(event);
-});
+hamburgerToggle();
 
 const radioButtons = document.querySelectorAll("input[name='authType']");
 const loginForm = document.getElementById("loginForm");
@@ -33,4 +25,14 @@ radioButtons.forEach((radio) => {
       errorContainer.classList.add("hidden");
     }
   });
+});
+
+const formLoginClick = document.forms.loginForm;
+formLoginClick.addEventListener("submit", (event) => {
+  onLogin(event);
+});
+
+const formRegisterClick = document.forms.registerForm;
+formRegisterClick.addEventListener("submit", (event) => {
+  onRegister(event);
 });

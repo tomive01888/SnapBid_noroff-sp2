@@ -39,7 +39,6 @@ export default async function router(pathname = window.location.pathname) {
       await import("./views/profileWins.mjs");
       break;
     default:
-      console.log("404 - Path not found:", pathname);
       await import("./views/notFound.mjs");
       break;
   }

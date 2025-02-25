@@ -32,10 +32,6 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-if (!sessionStorage.getItem("fresh-listing") === true) {
-  console.log("LOOOL");
-}
-
 let mediaCount = 1;
 const maxMediaCount = 8;
 

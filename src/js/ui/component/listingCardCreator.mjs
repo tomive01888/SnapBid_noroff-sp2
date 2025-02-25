@@ -21,10 +21,6 @@ let debounceTimeout;
 export function generateAuctionCards(data, appendContainer, winner) {
   const container = document.getElementById(appendContainer);
 
-  document.querySelectorAll(".content-container").forEach((div) => {
-    div.innerHTML = "";
-  });
-
   if (data.length === 0 && appendContainer === "listing") {
     container.classList.remove("grid");
     container.textContent = "You have not made any listings go to create listing to start auctioning items.";
@@ -50,6 +46,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
     console.error(`Container with ID "${appendContainer}" not found.`);
     return;
   }
+
   container.innerHTML = "";
 
   data.forEach((item) => {
@@ -61,17 +58,9 @@ export function generateAuctionCards(data, appendContainer, winner) {
 
     const cardInner = document.createElement("div");
     cardInner.className = "w-full border rounded-lg shadow-md bg-white p-2 ";
-    if (appendContainer !== "biddings") {
-      cardInner.classList.add("hover:bg-gray-100", "cursor-pointer");
-    }
 
     const listingTitle = document.createElement("h2");
     listingTitle.className = "text-2xl p-2 font-semibold overflow-hidden text-ellipsis whitespace-nowrap w-full";
-    if (appendContainer === "biddings") {
-      listingTitle.textContent = listing.title;
-    } else {
-      listingTitle.textContent = title;
-    }
 
     const cardBody = document.createElement("div");
     cardBody.className = "flex gap-1 w-full flex-col ";
@@ -80,15 +69,6 @@ export function generateAuctionCards(data, appendContainer, winner) {
     imgWrapper.className = " w-full max-w-58 aspect-[9/10] grid overflow-hidden rounded-md m-auto";
 
     const img = document.createElement("img");
-    if (appendContainer === "biddings") {
-      img.className = listing.media[0] ? "w-full h-full object-cover object-center" : "opacity-40 place-self-center";
-      img.src = listing.media[0] ? listing.media[0].url : "/snapbid_logo.png";
-      img.alt = listing.title || "";
-    } else {
-      img.className = media[0] ? "w-full h-full  object-cover object-center" : "opacity-40 place-self-center";
-      img.src = media[0] ? media[0].url : "/snapbid_logo.png";
-      img.alt = title || "";
-    }
 
     imgWrapper.appendChild(img);
 
@@ -96,8 +76,41 @@ export function generateAuctionCards(data, appendContainer, winner) {
     infoWrapper.className = "flex flex-col justify-between";
 
     const priceBidsTop = document.createElement("div");
-    priceBidsTop.className = "flex justify-between";
+    priceBidsTop.className = "w-full flex justify-between items-between";
+
+    const bidCount = document.createElement("p");
+    bidCount.className = "text-gray-600 text-xl";
+
+    const price = document.createElement("span");
+    price.className = "text-2xl price-large font-bold";
+    price.role = "presentation";
+    priceBidsTop.appendChild(bidCount);
+
+    const shipping = document.createElement("p");
+    shipping.className = "text-gray-500 place-self-end";
+    shipping.textContent = "Free shipping!";
+
+    const sellerName = document.createElement("p");
+    sellerName.className = "text-blue-500 font-semibold text-xl";
+
+    const endedLabel = document.createElement("div");
+    endedLabel.className =
+      "absolute font-body bottom-2 right-2 bg-red-400 text-white text-xl font-bold px-2 py-1 rounded";
+    endedLabel.textContent = "Auction Ended";
+
+    const timeRemaining = document.createElement("p");
+    timeRemaining.className = "text-md";
+
+    const category = document.createElement("p");
+    category.className = "font-semibold";
+
     if (appendContainer === "biddings") {
+      listingTitle.textContent = listing.title;
+
+      img.className = listing.media[0] ? "w-full h-full object-cover object-center" : "opacity-40 place-self-center";
+      img.src = listing.media[0] ? listing.media[0].url : "/snapbid_logo.png";
+      img.alt = listing.title || "";
+
       const amILeading = document.createElement("p");
 
       amILeading.textContent = "Am I leading?";
@@ -118,49 +131,40 @@ export function generateAuctionCards(data, appendContainer, winner) {
       goToListing.textContent = "Go to listing";
       goToListing.addEventListener("click", () => (window.location.href = `/post/index.html?listing_id=${listing.id}`));
       card.append(goToListing);
-    }
-    const bidCount = document.createElement("p");
-    bidCount.className = "text-gray-600 text-xl";
-    if (appendContainer === "biddings") {
-      bidCount.classList.add("h-6");
-    } else {
-      bidCount.textContent = `${_count.bids} bids`;
-    }
-    const price = document.createElement("span");
-    price.className = "text-2xl price-large font-bold";
-    price.role = "presentation";
-    priceBidsTop.appendChild(bidCount);
 
-    if (appendContainer !== "biddings") {
+      bidCount.classList.add("hidden");
+
+      price.textContent = `You bid ${amount}$`;
+      priceBidsTop.append(price);
+
+      sellerName.classList.add("h-4");
+
+      const timeLeft = getTimeRemaining(listing.endsAt);
+      timeRemaining.innerHTML = `Time remaining: <span class="text-red-500">${timeLeft}</span>`;
+
+      category.innerHTML = `Category: <span class="font-semibold text-black">${
+        listing.tags[0] || "No category"
+      }</span>`;
+    } else {
+      listingTitle.textContent = title;
+      cardInner.classList.add("hover:bg-gray-100", "cursor-pointer");
+
+      img.className = media[0] ? "w-full h-full  object-cover object-center" : "opacity-40 place-self-center";
+      img.src = media[0] ? media[0].url : "/snapbid_logo.png";
+      img.alt = title || "";
+
+      bidCount.textContent = `${_count.bids} bids`;
+
       const { highestBid } = getHighestBidValue(item);
       price.ariaLabel = `Current highest bid for item at ${highestBid}$`;
       price.textContent = `${highestBid}$`;
       priceBidsTop.appendChild(price);
-    } else {
-      price.textContent = `You bid ${amount}$`;
-      priceBidsTop.append(price);
-    }
 
-    const shipping = document.createElement("p");
-    shipping.className = "text-gray-500 place-self-end";
-    shipping.textContent = "Free shipping!";
-
-    const sellerName = document.createElement("p");
-    sellerName.className = "text-blue-500 font-semibold text-xl";
-    if (appendContainer === "biddings") {
-      sellerName.classList.add("h-4");
-    } else {
       sellerName.textContent = `@${seller.name}`;
-    }
 
-    const endedLabel = document.createElement("div");
-    endedLabel.className =
-      "absolute font-body bottom-2 right-2 bg-red-400 text-white text-xl font-bold px-2 py-1 rounded";
-    endedLabel.textContent = "Auction Ended";
-
-    if (appendContainer !== "biddings") {
       const timeLeft = getTimeRemaining(endsAt);
       const isEnded = timeLeft === "Ended";
+      timeRemaining.innerHTML = `Time remaining: <span class="text-red-500">${timeLeft}</span>`;
 
       const now = new Date();
       const ends = new Date(endsAt);
@@ -185,24 +189,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
           card.classList.add("opacity-60");
         }
       }
-    }
-    const timeRemaining = document.createElement("p");
-    timeRemaining.className = "text-md";
-    if (appendContainer === "biddings") {
-      const timeLeft = getTimeRemaining(listing.endsAt);
-      timeRemaining.innerHTML = `Time remaining: <span class="text-red-500">${timeLeft}</span>`;
-    } else {
-      const timeLeft = getTimeRemaining(endsAt);
-      timeRemaining.innerHTML = `Time remaining: <span class="text-red-500">${timeLeft}</span>`;
-    }
 
-    const category = document.createElement("p");
-    category.className = "font-semibold";
-    if (appendContainer === "biddings") {
-      category.innerHTML = `Category: <span class="font-semibold text-black">${
-        listing.tags[0] || "No category"
-      }</span>`;
-    } else {
       category.innerHTML = `Category: <span class="font-semibold text-black">${tags[0] || "No category"}</span>`;
     }
 
