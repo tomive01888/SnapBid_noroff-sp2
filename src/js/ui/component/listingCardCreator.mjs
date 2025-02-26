@@ -50,7 +50,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
   container.innerHTML = "";
 
   data.forEach((item) => {
-    const { id, title, media, seller, _count, tags, endsAt, amount, listing } = item;
+    const { id, title, media, seller, _count, tags, endsAt, amount, listing, created } = item;
 
     const card = document.createElement("div");
     card.className =
@@ -104,6 +104,9 @@ export function generateAuctionCards(data, appendContainer, winner) {
     const category = document.createElement("p");
     category.className = "font-semibold";
 
+    const createdAt = document.createElement("p");
+    createdAt.className = "text-gray-600";
+
     if (appendContainer === "biddings") {
       listingTitle.textContent = listing.title;
 
@@ -145,6 +148,10 @@ export function generateAuctionCards(data, appendContainer, winner) {
       category.innerHTML = `Category: <span class="font-semibold text-black">${
         listing.tags[0] || "No category"
       }</span>`;
+
+      const dateISO = listing.created;
+      const dateConvert = new Date(dateISO);
+      createdAt.textContent = `Created: ${dateConvert.toLocaleDateString()}`;
     } else {
       listingTitle.textContent = title;
       cardInner.classList.add("hover:bg-gray-100", "cursor-pointer");
@@ -191,6 +198,10 @@ export function generateAuctionCards(data, appendContainer, winner) {
       }
 
       category.innerHTML = `Category: <span class="font-semibold text-black">${tags[0] || "No category"}</span>`;
+
+      const dateISO = created;
+      const dateConvert = new Date(dateISO);
+      createdAt.textContent = `Created: ${dateConvert.toLocaleDateString()}`;
     }
 
     infoWrapper.appendChild(priceBidsTop);
@@ -198,6 +209,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
     infoWrapper.appendChild(sellerName);
     infoWrapper.appendChild(timeRemaining);
     infoWrapper.appendChild(category);
+    infoWrapper.appendChild(createdAt);
 
     cardBody.appendChild(imgWrapper);
     cardBody.appendChild(infoWrapper);

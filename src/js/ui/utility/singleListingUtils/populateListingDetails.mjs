@@ -41,4 +41,16 @@ export function populateListingDetails(listing) {
   document.getElementById("avatar").alt = listing.seller.avatar.alt || "Seller Avatar";
 
   document.getElementById("seller-name").textContent = listing.seller.name;
+
+  document.getElementById("createdAt").textContent = `Created: ${timeConvertedToLocaleString(listing.created)}`;
+  document.getElementById("updatedAt").textContent = `Updated: ${timeConvertedToLocaleString(listing.updated)}`;
+}
+
+function timeConvertedToLocaleString(data) {
+  const createdData = data;
+  if (createdData) {
+    const dateConvert = new Date(createdData);
+    const createdAt = `${dateConvert.toLocaleDateString()}`;
+    return createdAt;
+  }
 }

@@ -1,12 +1,12 @@
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
-import { goToPage, initializeHome, nextPage, prevPage } from "../../ui/component/paginator&HomeStartup.mjs";
 import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
 import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
+import { goToPage, updateListings, nextPage, prevPage } from "../../ui/component/paginator&HomeStartup.mjs";
 
 generateNavbar();
 hamburgerToggle();
-initializeHome();
+updateListings();
 compareUserAccess();
 
 document.getElementById("next-posts").addEventListener("click", nextPage);

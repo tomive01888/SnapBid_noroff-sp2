@@ -41,7 +41,7 @@ async function activateSingleListing() {
 activateSingleListing();
 
 const { highestBidName } = getHighestBidValue(listingData);
-const user = JSON.parse(sessionStorage.getItem("SnapBid-User")) || null;
+const user = JSON.parse(sessionStorage.getItem("SnapBid-User")) || {};
 if (highestBidName === user.name) {
   bidNowButton.disabled = true;
 } else {

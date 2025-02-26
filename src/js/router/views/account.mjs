@@ -2,6 +2,7 @@ import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 import { onLogin } from "../../ui/utility/accountUtils/login.mjs";
 import { onRegister } from "../../ui/utility/accountUtils/register.mjs";
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
+import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
 
 generateNavbar();
 hamburgerToggle();
@@ -28,11 +29,14 @@ radioButtons.forEach((radio) => {
 });
 
 const formLoginClick = document.forms.loginForm;
-formLoginClick.addEventListener("submit", (event) => {
-  onLogin(event);
-});
+formLoginClick.addEventListener("submit", onLogin);
 
 const formRegisterClick = document.forms.registerForm;
 formRegisterClick.addEventListener("submit", (event) => {
   onRegister(event);
 });
+
+if (sessionStorage.getItem("restricted") === "true") {
+  showToastMessage("Accessible for registered users only!", "error");
+  sessionStorage.removeItem("restricted");
+}
