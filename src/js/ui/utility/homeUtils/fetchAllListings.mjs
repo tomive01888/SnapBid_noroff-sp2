@@ -11,9 +11,9 @@ import { AUCTION_LISTING_ENDPOINT } from "../../../api/constants.mjs";
  *
  * @returns {Promise<Object>} - A promise resolving to the fetched listings data.
  */
-export async function fetchAllListings(currentPage, showInactive, limit = 12) {
+export async function fetchAllListings(currentPage, showInactive) {
   const params = new URLSearchParams({
-    limit,
+    limit: 12,
     page: currentPage,
     _seller: true,
     _bids: true,

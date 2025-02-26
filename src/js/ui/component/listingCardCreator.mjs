@@ -117,7 +117,8 @@ export function generateAuctionCards(data, appendContainer, winner) {
       const amILeading = document.createElement("p");
 
       amILeading.textContent = "Am I leading?";
-      amILeading.className = "text-lg font-body text-gray-400 underline cursor-pointer hover:text-gray-500";
+      amILeading.className =
+        "p-1 border-1 bg-gray-100 rounded-full font-body text-gray-500 hover:text-gray-700 cursor-pointer hover:text-gray-500";
       amILeading.addEventListener("click", () => {
         if (debounceTimeout) return;
         debounceTimeout = setTimeout(() => {

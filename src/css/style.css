@@ -28,4 +28,9 @@
   select {
     @apply font-body;
   }
+
+  #display-more-content:hover #icon-show-listings,
+  #display-bid-list:hover #icon-bid-history {
+    @apply animate-bounce;
+  }
 }
