@@ -251,11 +251,11 @@ async function checkLeadingStatus(listingId, myBid, overlay) {
   overlayP.className = " text-center text-3xl text-semibold";
 
   if (myBid < highestBid.highestBid) {
-    overlayDiv.classList.add("bg-red-500/60");
-    overlayP.textContent = "❕ You've been outbid!";
+    overlayDiv.classList.add("bg-red-400/60", "backdrop-blur-[2px]");
+    overlayP.textContent = "👎 You've been outbid!";
   } else {
-    overlayDiv.classList.add("bg-green-500/60");
-    overlayP.textContent = "✨ You are leading!";
+    overlayDiv.classList.add("bg-green-400/60", "backdrop-blur-[2px]");
+    overlayP.textContent = "👍 You are leading!";
   }
 
   overlayDiv.appendChild(overlayP);
