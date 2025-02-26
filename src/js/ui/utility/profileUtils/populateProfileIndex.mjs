@@ -15,5 +15,5 @@ export function populateProfileIndex() {
   document.getElementById("userProfileImage").src = user.avatar.url;
   document.getElementById("userProfileName").textContent = user.name;
   document.getElementById("userProfileCurrency").textContent = `${userCredits}$`;
-  document.getElementById("head-profile").innerHTML = `SnapBid | ${user.name}`;
+  document.getElementById("head-profile").innerHTML = `${user.name} | SnapBid`;
 }

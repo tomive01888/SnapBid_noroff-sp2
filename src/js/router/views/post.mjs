@@ -20,7 +20,7 @@ const urlSearch = new URLSearchParams(window.location.search);
 const listId = urlSearch.get("listing_id");
 const listingData = await getListingData(listId);
 const bidNowButton = document.getElementById("bid-now");
-document.getElementById("head-title").textContent = `SnapBid | ${listingData.title}`;
+document.getElementById("head-title").textContent = `${listingData.title} | SnapBid`;
 
 showMoreListingsFromSeller(listingData, listId);
 showBidHistory(listingData);
