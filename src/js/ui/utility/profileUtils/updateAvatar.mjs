@@ -26,6 +26,7 @@ export async function updateProfileAvatar(event, user) {
   const token = sessionStorage.getItem("token");
 
   if (!avatarUrl) {
+    showToastMessage("Please enter an image url", "error");
     return;
   }
 

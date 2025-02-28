@@ -27,11 +27,23 @@ SnapBid is an auction platform where users can list items for bidding and place 
 
 ## 🛠 Built With
 
-[<img title="Figma" height="48px" width="48px" src="https://skillicons.dev/icons?i=figma"/>](https://www.figma.com/)  
-[<img title="HTML" height="48px" width="48px" src="https://skillicons.dev/icons?i=html"/>](https://developer.mozilla.org/en-US/docs/Web/HTML)  
-[<img title="Tailwind CSS" height="48px" width="48px" src="https://skillicons.dev/icons?i=tailwind"/>](https://tailwindcss.com/)  
-[<img title="JavaScript" height="48px" width="48px" src="https://skillicons.dev/icons?i=js"/>](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  
-[<img title="Vite" height="48px" width="48px" src="https://skillicons.dev/icons?i=vite"/>](https://vite.dev/)
+<div style="display: flex; gap: 10px;">
+  <a href="https://www.figma.com/">
+    <img title="Figma" height="48px" width="48px" src="https://skillicons.dev/icons?i=figma"/>
+  </a>  
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">
+    <img title="HTML" height="48px" width="48px" src="https://skillicons.dev/icons?i=html"/>
+  </a>  
+  <a href="https://tailwindcss.com/">
+    <img title="Tailwind CSS" height="48px" width="48px" src="https://skillicons.dev/icons?i=tailwind"/>
+  </a>  
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+    <img title="JavaScript" height="48px" width="48px" src="https://skillicons.dev/icons?i=js"/>
+  </a>  
+  <a href="https://vite.dev/">
+    <img title="Vite" height="48px" width="48px" src="https://skillicons.dev/icons?i=vite"/>
+  </a>
+</div>
 
 ---
 
@@ -81,6 +93,20 @@ VITE_API_KEY=<your_api_key>
 Replace `<your_api_key>` with the actual API key.
 
 4. Add `.env` in `.gitignore` to stop it from being pushed publicly.
+
+---
+
+## API Reference
+
+This project interacts with the **Noroff Auction House API**, which provides endpoints for managing auction listings.  
+For detailed documentation, visit: [Noroff Auction House API](https://docs.noroff.dev/docs/v2/auction-house/listings).
+
+### Base URL:
+```
+https://api.noroff.dev/api/v2
+``` 
+⚠️ Some of the endpoints requires authenticated keys to use.
+Read more in the link above about which requires authentication and more on url parameters.
 
 ---
 
