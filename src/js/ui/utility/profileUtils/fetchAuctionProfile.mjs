@@ -35,6 +35,10 @@ export async function fetchAuctionProfileCredits(name, token) {
   }
 }
 
+/**
+ * Grabs values from sessionStorage, returns early if not found.
+ * Passes values into fetchActionprofileCredits() for fetching of user profile credits amount.
+ */
 export async function initializeAuctionProfile() {
   const token = sessionStorage.getItem("token");
   const user = JSON.parse(sessionStorage.getItem("SnapBid-User"));
