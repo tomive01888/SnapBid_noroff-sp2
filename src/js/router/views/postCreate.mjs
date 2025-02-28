@@ -3,11 +3,13 @@ import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
 import { authGuard } from "../../ui/utility/authGuard.mjs";
 import { postNewListing } from "../../ui/utility/profileUtils/createNewListing.mjs";
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
+import { initializeAuctionProfile } from "../../ui/utility/profileUtils/fetchAuctionProfile.mjs";
 
 generateNavbar();
 authGuard();
 hamburgerToggle();
 compareUserAccess();
+initializeAuctionProfile();
 
 const form = document.forms.createNewListing;
 form.addEventListener("submit", async (event) => {

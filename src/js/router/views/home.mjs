@@ -3,11 +3,13 @@ import { compareUserAccess } from "../../ui/utility/compareUserAccess.mjs";
 import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 import { goToPage, updateListings, nextPage, prevPage } from "../../ui/component/paginator&HomeStartup.mjs";
+import { initializeAuctionProfile } from "../../ui/utility/profileUtils/fetchAuctionProfile.mjs";
 
 generateNavbar();
 hamburgerToggle();
 updateListings();
 compareUserAccess();
+initializeAuctionProfile();
 
 document.getElementById("next-posts").addEventListener("click", nextPage);
 document.getElementById("prev-posts").addEventListener("click", prevPage);

@@ -3,9 +3,11 @@ import { onLogin } from "../../ui/utility/accountUtils/login.mjs";
 import { onRegister } from "../../ui/utility/accountUtils/register.mjs";
 import { hamburgerToggle } from "../../ui/globals/hamburgerToggler.mjs";
 import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
+import { initializeAuctionProfile } from "../../ui/utility/profileUtils/fetchAuctionProfile.mjs";
 
 generateNavbar();
 hamburgerToggle();
+initializeAuctionProfile();
 
 const radioButtons = document.querySelectorAll("input[name='authType']");
 const loginForm = document.getElementById("loginForm");

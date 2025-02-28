@@ -11,10 +11,12 @@ import { showMoreListingsFromSeller } from "../../ui/utility/singleListingUtils/
 import { showBidHistory } from "../../ui/utility/singleListingUtils/showBidHistory.mjs";
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 import { getListingData } from "../../ui/utility/singleListingUtils/fetchListingData.mjs";
+import { initializeAuctionProfile } from "../../ui/utility/profileUtils/fetchAuctionProfile.mjs";
 
 compareUserAccess();
 generateNavbar();
 hamburgerToggle();
+initializeAuctionProfile();
 
 const urlSearch = new URLSearchParams(window.location.search);
 const listId = urlSearch.get("listing_id");
