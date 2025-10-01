@@ -41,13 +41,19 @@ export function generateNavbar() {
   const authBtn = document.createElement("a");
   authBtn.href = token ? "#" : "/auth/index.html";
   authBtn.textContent = token ? "Logout" : "Login";
-  authBtn.className =
-    "cursor-pointer text-2xl font-custom text-white text-center w-26 border-1 rounded-full transition-colors duration-500 " +
-    (token
-      ? "bg-red-500 border-red-700 hover:bg-red-400/30"
-      : isAuth
-      ? "bg-blue-500 pointer-events-none"
-      : "bg-green-500 border-green-700 hover:bg-green-400/30");
+  const authBtnBaseClasses =
+    "cursor-pointer text-2xl font-custom text-white text-center w-26 border-1 rounded-full transition-colors duration-500";
+
+  let colorClasses;
+  if (token) {
+    colorClasses = "bg-red-500 border-red-700 hover:bg-red-400/30";
+  } else if (isAuth) {
+    colorClasses = "bg-blue-500 pointer-events-none";
+  } else {
+    colorClasses = "bg-green-500 border-green-700 hover:bg-green-400/30";
+  }
+
+  authBtn.className = `${authBtnBaseClasses} ${colorClasses}`;
 
   if (token) {
     authBtn.addEventListener("click", logoutEvent);
