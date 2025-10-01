@@ -2,7 +2,33 @@ import { getHighestBidValue } from "../utility/getHighestBidHandler.mjs";
 import { getTimeRemaining } from "../utility/timeRemaining.mjs";
 import { getListingData } from "../utility/singleListingUtils/fetchListingData.mjs";
 
-let debounceTimeout;
+const debounceState = { timeout: null };
+
+/**
+ * Executes the given action while enforcing a debounce delay.
+ *
+ * Ensures that the provided callback function (`action`) is only executed once
+ * within the debounce window (default: 1000ms). If the function is triggered again
+ * before the timeout clears, it will be ignored until the debounce period resets.
+ *
+ * @function debounceAction
+ * @param {Function} action - The callback function to be executed after passing the debounce check.
+ * @example
+ * // Example usage:
+ * button.addEventListener("click", () => {
+ *   debounceAction(() => console.log("Clicked without spamming!"));
+ * });
+ */
+function debounceAction(action) {
+  if (debounceState.timeout) return;
+
+  debounceState.timeout = setTimeout(() => {
+    debounceState.timeout = null;
+  }, 1000);
+
+  action();
+}
+
 /**
  * Generates and displays auction item cards.
  *
@@ -17,7 +43,6 @@ let debounceTimeout;
  * @param {Array} data - The auction listings data array.
  * @param {string} appendContainer - The ID of the container to append the auction cards.
  */
-
 export function generateAuctionCards(data, appendContainer, winner) {
   const container = document.getElementById(appendContainer);
 
@@ -120,12 +145,7 @@ export function generateAuctionCards(data, appendContainer, winner) {
       amILeading.className =
         "p-1 border-1 bg-gray-100 rounded-full font-body text-gray-500 hover:text-gray-700 cursor-pointer hover:text-gray-500";
       amILeading.addEventListener("click", () => {
-        if (debounceTimeout) return;
-        debounceTimeout = setTimeout(() => {
-          debounceTimeout = null;
-        }, 1000);
-
-        checkLeadingStatus(listing.id, amount, card);
+        debounceAction(() => checkLeadingStatus(listing.id, amount, card));
       });
       priceBidsTop.append(amILeading);
 
@@ -245,16 +265,16 @@ async function checkLeadingStatus(listingId, myBid, overlay) {
 
   const overlayDiv = document.createElement("div");
   overlayDiv.className =
-    "grid place-items-center absolute top-0 left-0 w-full h-full rounded-md opacity-0 transform translate-x-full transition-all duration-500 ease-in-out";
+    "grid place-items-center absolute bottom-0 left-0 w-full h-20 rounded-md opacity-0 transform translate-y-full transition-all duration-300 ease-in-out";
 
   const overlayP = document.createElement("p");
   overlayP.className = " text-center text-3xl text-semibold";
 
   if (myBid < highestBid.highestBid) {
-    overlayDiv.classList.add("bg-red-400/60", "backdrop-blur-[2px]");
+    overlayDiv.classList.add("bg-red-500/60", "backdrop-blur-[2px]");
     overlayP.textContent = "👎 You've been outbid!";
   } else {
-    overlayDiv.classList.add("bg-green-400/60", "backdrop-blur-[2px]");
+    overlayDiv.classList.add("bg-green-500/60", "backdrop-blur-[2px]");
     overlayP.textContent = "👍 You are leading!";
   }
 
@@ -262,7 +282,7 @@ async function checkLeadingStatus(listingId, myBid, overlay) {
   overlay.append(overlayDiv);
 
   setTimeout(() => {
-    overlayDiv.classList.remove("opacity-0", "translate-x-full");
+    overlayDiv.classList.remove("opacity-0", "translate-y-full");
     overlayDiv.classList.add("opacity-100", "translate-x-0");
   }, 10);
   setTimeout(() => {
@@ -272,5 +292,5 @@ async function checkLeadingStatus(listingId, myBid, overlay) {
     setTimeout(() => {
       overlayDiv.remove();
     }, 500);
-  }, 3000);
+  }, 2400);
 }
