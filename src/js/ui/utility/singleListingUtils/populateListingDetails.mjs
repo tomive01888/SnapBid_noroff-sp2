@@ -46,11 +46,23 @@ export function populateListingDetails(listing) {
   document.getElementById("updatedAt").textContent = `Updated: ${timeConvertedToLocaleString(listing.updated)}`;
 }
 
-function timeConvertedToLocaleString(data) {
-  const createdData = data;
-  if (createdData) {
-    const dateConvert = new Date(createdData);
-    const createdAt = `${dateConvert.toLocaleDateString()}`;
-    return createdAt;
+/**
+ * Converts a date string, timestamp, or Date object to a readable locale string.
+ *
+ * @param {string | number | Date} dateInput - The date to convert.
+ * @param {Object} [options] - Optional formatting options.
+ * @param {string} [options.locale] - Locale code, e.g., 'en-US'. Defaults to browser locale.
+ * @param {Object} [options.dateOptions] - Options for date formatting (passed to toLocaleDateString).
+ * @returns {string} Formatted date string or 'Invalid Date' if input is invalid.
+ */
+function timeConvertedToLocaleString(dateInput, options = {}) {
+  const { locale = undefined, dateOptions = { year: "numeric", month: "long", day: "numeric" } } = options;
+
+  const date = new Date(dateInput);
+
+  if (isNaN(date.getTime())) {
+    return "Invalid Date";
   }
+
+  return date.toLocaleDateString(locale, dateOptions);
 }
