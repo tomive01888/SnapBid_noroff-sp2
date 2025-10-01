@@ -48,11 +48,11 @@ if (highestBidName === user.name) {
   bidNowButton.disabled = true;
 } else {
   bidNowButton.addEventListener("click", () => {
-    if (listingData) {
-      openBidModal(listingData, listId);
-    } else {
-      console.error("Listing data not available yet.");
+    if (!listingData) {
+      showToastMessage("Listing data not available. Please refresh and try again.", "error");
+      return;
     }
+    openBidModal(listingData, listId);
   });
 }
 

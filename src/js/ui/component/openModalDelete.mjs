@@ -68,7 +68,7 @@ export async function openDeleteModal(listingId) {
  * The overlay also contains a message indicating that the deletion is being processed.
  */
 function showLoaderOverlay() {
-  let loaderOverlay = document.createElement("div");
+  const loaderOverlay = document.createElement("div");
   loaderOverlay.id = "loaderOverlay";
   loaderOverlay.className =
     "fixed inset-0 flex flex-col justify-center items-center bg-black/80 bg-opacity-70 z-50 text-white text-lg";
