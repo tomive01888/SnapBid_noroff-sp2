@@ -2,6 +2,7 @@ import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionGetAuctionInformation } from "../../../api/apiRequestOptions.mjs";
 import { getAuctionEndpoints } from "../../../api/constants.mjs";
 import { generateAuctionCards } from "../../component/listingCardCreator.mjs";
+import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
 
 /**
  * Fetches and displays the user's highest bids on active auction listings.
@@ -41,6 +42,6 @@ export async function fetchAndDisplayOwnBids() {
 
     generateAuctionCards(filteredListings, "biddings");
   } catch (error) {
-    console.error("Error fetching and displaying own listings:", error);
+    showToastMessage(`${error.message}`, "error");
   }
 }

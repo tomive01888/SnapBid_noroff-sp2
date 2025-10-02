@@ -1,6 +1,7 @@
 import { handleApiRequest } from "../../api/apiRequestHandler.mjs";
 import { optionDeleteListing } from "../../api/apiRequestOptions.mjs";
 import { AUCTION_LISTING_ENDPOINT } from "../../api/constants.mjs";
+import { showToastMessage } from "../toastMessages/showToastMessage.mjs";
 
 /**
  * Opens a modal to confirm the deletion of a listing. If confirmed, the listing is deleted from the database.
@@ -50,7 +51,7 @@ export async function openDeleteModal(listingId) {
         window.location.href = "/";
       }, 1750);
     } catch (error) {
-      console.error("Error deleting listing:", error);
+      showToastMessage(`${error.message}`, "error");
       removeLoaderOverlay();
     } finally {
       modalBackground.remove();

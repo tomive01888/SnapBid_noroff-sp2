@@ -6,7 +6,7 @@
  */
 export function generateNavbar() {
   const nav = document.getElementById("navbar");
-  nav.innerHTML = "";
+  nav.replaceChildren();
 
   const currentPath = window.location.pathname;
   const token = sessionStorage.getItem("token");

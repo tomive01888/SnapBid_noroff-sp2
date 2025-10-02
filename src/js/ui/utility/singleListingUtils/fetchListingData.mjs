@@ -1,6 +1,7 @@
 import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionGet } from "../../../api/apiRequestOptions.mjs";
 import { AUCTION_LISTING_ENDPOINT } from "../../../api/constants.mjs";
+import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
 
 /**
  * Fetches listing data for a given auction ID, including seller and bid details.
@@ -10,7 +11,7 @@ import { AUCTION_LISTING_ENDPOINT } from "../../../api/constants.mjs";
  */
 export async function getListingData(id) {
   if (!id) {
-    console.error("getListingData: Missing or invalid ID");
+    showToastMessage("getListingData: Missing or invalid ID");
     return null;
   }
 
@@ -20,7 +21,8 @@ export async function getListingData(id) {
     const req = await handleApiRequest(newUrl, optionGet);
     return req?.data || null;
   } catch (error) {
-    console.error("Error fetching listing:", error);
+    showToastMessage(`${error.message}`, "error");
+
     return null;
   }
 }

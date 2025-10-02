@@ -2,6 +2,7 @@ import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionGetAuctionInformation } from "../../../api/apiRequestOptions.mjs";
 import { getAuctionEndpoints } from "../../../api/constants.mjs";
 import { generateAuctionCards } from "../../component/listingCardCreator.mjs";
+import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
 
 const singleEndpoint = getAuctionEndpoints();
 const token = sessionStorage.getItem("token");
@@ -23,6 +24,6 @@ export async function fetchAndDisplayOwnWins() {
 
     generateAuctionCards(req.data, "winnings", "winner");
   } catch (error) {
-    console.error("Error fetching and displaying own listings:", error);
+    showToastMessage(`${error.message}`, "error");
   }
 }

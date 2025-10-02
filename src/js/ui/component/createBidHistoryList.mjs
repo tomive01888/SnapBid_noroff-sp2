@@ -23,7 +23,7 @@ export function createBidHistory(bids) {
 
   const sortList = bids.sort((a, b) => b.amount - a.amount);
 
-  bidHistorySection.innerHTML = "";
+  bidHistorySection.replaceChildren();
 
   if (bids.length === 0) {
     const noBidsMessage = document.createElement("p");

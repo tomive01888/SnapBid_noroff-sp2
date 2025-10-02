@@ -94,8 +94,6 @@ export async function onRegister(event) {
 
     showModalRegisterSuccess(data.data.name);
   } catch (error) {
-    console.error("Registration failed:", error);
-
     showToastMessage(error.message, "error");
     setTimeout(() => {
       sessionStorage.removeItem("toastMessage");

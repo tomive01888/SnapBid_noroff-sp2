@@ -33,9 +33,19 @@ export function populateListingDetails(listing) {
 
   document.getElementById("bid-amount").textContent = `${listing._count.bids} bids`;
 
-  document.getElementById("description").innerHTML = listing.description
-    ? listing.description.replace(/\n/g, "<br>")
-    : "This listing has no description";
+  const descriptionEl = document.getElementById("description");
+
+  if (listing.description) {
+    descriptionEl.textContent = "";
+    listing.description.split("\n").forEach((line, index, arr) => {
+      descriptionEl.appendChild(document.createTextNode(line));
+      if (index < arr.length - 1) {
+        descriptionEl.appendChild(document.createElement("br"));
+      }
+    });
+  } else {
+    descriptionEl.textContent = "This listing has no description";
+  }
 
   document.getElementById("avatar").src = listing.seller.avatar.url;
   document.getElementById("avatar").alt = listing.seller.avatar.alt || "Seller Avatar";

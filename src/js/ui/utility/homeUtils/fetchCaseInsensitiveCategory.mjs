@@ -1,6 +1,8 @@
 import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionGet } from "../../../api/apiRequestOptions.mjs";
 import { AUCTION_LISTING_ENDPOINT } from "../../../api/constants.mjs";
+import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
+import { fetchAllListings } from "./fetchAllListings.mjs";
 
 /**
  * Fetches auction listings filtered by tag, case-insensitively, with pagination support.
@@ -59,7 +61,7 @@ export async function fetchCaseInsensitiveCategories(tag, currentPage, activeTog
 
     return { data: paginatedMergedData, meta: updatedMeta };
   } catch (error) {
-    console.error("Error fetching filtered listings:", error);
+    showToastMessage(`${error.message}`, "error");
     throw error;
   }
 }

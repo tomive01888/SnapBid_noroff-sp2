@@ -1,8 +1,7 @@
 import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionGetAuctionInformation } from "../../../api/apiRequestOptions.mjs";
 import { AUCTION_PROFILES_ENDPOINT } from "../../../api/constants.mjs";
-
-const accessToken = sessionStorage.getItem("token");
+import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
 
 /**
  * Fetches the user's auction profile information and stores the user's credits in sessionStorage.
@@ -31,7 +30,7 @@ export async function fetchAuctionProfileCredits(name, token) {
       sessionStorage.setItem("SnapBid-Credits", credits);
     }
   } catch (error) {
-    console.error("Failed to fetch auction profile:", error);
+    showToastMessage(`${error.message}`, "error");
   }
 }
 
@@ -46,5 +45,5 @@ export async function initializeAuctionProfile() {
 
   if (!name || !token) return;
 
-  await fetchAuctionProfileCredits(name, token);
+  fetchAuctionProfileCredits(name, token);
 }

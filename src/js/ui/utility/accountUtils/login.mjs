@@ -47,7 +47,6 @@ export async function onLogin(event) {
       window.location.href = "/";
     }, 500);
   } catch (error) {
-    console.error("Login failed:", error);
     showToastMessage(error.message, "error");
     setTimeout(() => {
       sessionStorage.removeItem("logging-in");

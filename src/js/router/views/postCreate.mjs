@@ -4,6 +4,7 @@ import { authGuard } from "../../ui/utility/authGuard.mjs";
 import { postNewListing } from "../../ui/utility/profileUtils/createNewListing.mjs";
 import { generateNavbar } from "../../ui/globals/navbarAccess.mjs";
 import { initializeAuctionProfile } from "../../ui/utility/profileUtils/fetchAuctionProfile.mjs";
+import { showToastMessage } from "../../ui/toastMessages/showToastMessage.mjs";
 
 generateNavbar();
 authGuard();
@@ -18,7 +19,7 @@ form.addEventListener("submit", async (event) => {
   const loader = document.getElementById("loader");
   const submitBtn = document.getElementById("submit-btn");
   submitBtn.disabled = true;
-  submitBtn.innerHTML = "";
+  submitBtn.replaceChildren();
   loader.classList.remove("hidden");
   loader.classList.add("inline-block");
   submitBtn.appendChild(loader);
@@ -28,6 +29,7 @@ form.addEventListener("submit", async (event) => {
     postNewListing();
     form.reset();
   } catch (error) {
+    showToastMessage(` ${error ? error.messge : "Error occured while creating new listing"}`, "error");
   } finally {
     submitBtn.disabled = false;
     loader.classList.remove("inline-block");

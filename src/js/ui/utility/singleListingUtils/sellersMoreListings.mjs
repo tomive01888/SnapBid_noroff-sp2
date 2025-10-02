@@ -2,6 +2,7 @@ import { handleApiRequest } from "../../../api/apiRequestHandler.mjs";
 import { optionGetAuctionInformation } from "../../../api/apiRequestOptions.mjs";
 import { AUCTION_PROFILES_ENDPOINT } from "../../../api/constants.mjs";
 import { generateAuctionCards } from "../../component/listingCardCreator.mjs";
+import { showToastMessage } from "../../toastMessages/showToastMessage.mjs";
 
 /**
  * Fetches and displays additional listings from the same seller, excluding the current listing.
@@ -32,7 +33,7 @@ export async function fetchMoreFromSeller(sellerName, currentListingId) {
     const filteredListings = sellerListings.filter((listing) => listing.id !== currentListingId);
 
     if (filteredListings.length === 0) {
-      seeMoreContainer.innerHTML = "<p>No more listings from this seller.</p>";
+      seeMoreContainer.textContent = "No more listings from this seller";
       return;
     }
 
@@ -40,6 +41,6 @@ export async function fetchMoreFromSeller(sellerName, currentListingId) {
 
     generateAuctionCards(randomListings, "see-more");
   } catch (error) {
-    console.error("Error fetching more listings from seller:", error);
+    showToastMessage(`${error.message}`, "error");
   }
 }

@@ -55,22 +55,19 @@ async function fetchData(searchQuery, selectedCategory, showInactive) {
       ({ data, meta } = await handleApiRequest(url, optionGet));
     }
   } catch (error) {
-    showToastMessage("Failed to load listings. Please try again.", "error");
-    console.error(error);
+    showToastMessage(`${error.message}`, "error");
   }
   return { data, meta };
 }
-
 export async function updateListings() {
   const showInactive = document.getElementById("enable-inactive-listings").checked;
   const searchQuery = document.getElementById("search-listing").value.trim();
   const selectedCategory = document.getElementById("category-select").value;
 
   const { data, meta } = await fetchData(searchQuery, selectedCategory, showInactive);
-
   const container = document.getElementById("listings-container");
   if (!data || data.length === 0) {
-    container.innerHTML = `<p>Sorry, there are no results with these search criteria.</p>`;
+    container.textContent = `Sorry, there are no results with these search criteria`;
   } else {
     generateAuctionCards(data, "listings-container");
   }
@@ -108,12 +105,16 @@ export async function nextPage() {
 }
 
 export async function goToPage(pageInput) {
-  if (pageInput >= 1) {
+  const maxPageText = document.querySelector(".max-page").textContent;
+  const maxPage = parseInt(maxPageText.replace("of ", ""), 10) || 1;
+  if (pageInput >= 1 && pageInput <= maxPage) {
     currentPage = pageInput;
     await updateListings();
     document.getElementById("search-listing").scrollIntoView({ behavior: "smooth" });
   } else {
-    showToastMessage(`Please enter a page number between 1 and ${meta.pageCount}`, "error");
+    showToastMessage(`Please enter a page number between 1 and ${maxPage}`, "error");
+    currentPage = 1;
+    goToPage(1);
   }
 }
 

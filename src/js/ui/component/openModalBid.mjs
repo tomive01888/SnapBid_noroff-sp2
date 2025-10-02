@@ -79,7 +79,7 @@ function showConfirmationModal(bidAmount, listId) {
   const confirmContent = document.createElement("div");
   confirmContent.className =
     "bg-white p-6 rounded-md w-96 h-80  shadow-lg text-center flex flex-col items-center justify-center";
-  confirmContent.innerHTML = `<p>Confirm your bid of $${bidAmount}?</p>`;
+  confirmContent.textContent = `Confirm your bid of $${bidAmount}?`;
 
   const buttonContainer = document.createElement("div");
   buttonContainer.className = "flex gap-8 justify-around mt-4";

@@ -18,7 +18,7 @@ export function createImageGallery(containerId, mediaArray) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  container.innerHTML = "";
+  container.replaceChildren();
 
   let currentIndex = 0;
 
@@ -30,8 +30,8 @@ export function createImageGallery(containerId, mediaArray) {
   activeImg.className = "w-full object-cover rounded-md shadow-lg outline-1 outline-gray-200";
 
   const leftButton = document.createElement("button");
-  leftButton.innerHTML = "&#10094;";
-  leftButton.className = "p-2 rounded-full bg-blue-500 text-white shadow hidden md:flex disabled:opacity-30";
+  leftButton.textContent = "<";
+  leftButton.className = "p-2 rounded-full bg-blue-500 text-2xl text-white shadow hidden md:flex disabled:opacity-30";
   leftButton.addEventListener("click", () => {
     currentIndex = currentIndex === 0 ? mediaArray.length - 1 : currentIndex - 1;
     updateActiveImage();
@@ -39,8 +39,8 @@ export function createImageGallery(containerId, mediaArray) {
   });
 
   const rightButton = document.createElement("button");
-  rightButton.innerHTML = "&#10095;";
-  rightButton.className = "p-2 rounded-full bg-blue-500 text-white shadow hidden md:flex disabled:opacity-30";
+  rightButton.textContent = ">";
+  rightButton.className = "p-2 rounded-full bg-blue-500 text-2xl text-white shadow hidden md:flex disabled:opacity-30";
   rightButton.addEventListener("click", () => {
     currentIndex = currentIndex === mediaArray.length - 1 ? 0 : currentIndex + 1;
     updateActiveImage();

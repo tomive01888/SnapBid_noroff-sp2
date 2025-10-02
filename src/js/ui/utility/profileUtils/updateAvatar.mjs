@@ -47,13 +47,12 @@ export async function updateProfileAvatar(event, user) {
       throw new Error(response?.error || "Failed to update the avatar.");
     }
 
-    const { accessToken, ...userData } = response.data;
+    const { ...userData } = response.data;
     sessionStorage.setItem("SnapBid-User", JSON.stringify(userData));
     sessionStorage.setItem("avatar-update", "success");
 
     location.reload();
   } catch (error) {
-    console.error("Error updating avatar:", error);
-    showToastMessage(error.message, "error");
+    showToastMessage(`${error.message}`, "error");
   }
 }

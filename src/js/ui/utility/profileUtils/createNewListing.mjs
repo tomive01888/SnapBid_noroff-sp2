@@ -58,7 +58,6 @@ export async function postNewListing() {
       showToastMessage("Your auction listing has been created!", "success");
     }
   } catch (error) {
-    console.error("Error creating auction listing:", error);
-    showToastMessage(error.message, "error");
+    showToastMessage(`${error.message}`, "error");
   }
 }

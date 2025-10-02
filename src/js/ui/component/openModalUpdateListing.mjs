@@ -180,7 +180,7 @@ export async function openModalUpdateListing(id, data) {
       modal.remove();
       location.reload();
     } catch (error) {
-      console.error("Error updating listing:", error);
+      showToastMessage(`${error.message}`, "error");
     } finally {
       updateButton.disabled = false;
       updateButton.textContent = "Update Listing";

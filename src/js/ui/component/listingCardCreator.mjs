@@ -1,6 +1,7 @@
 import { getHighestBidValue } from "../utility/getHighestBidHandler.mjs";
 import { getTimeRemaining } from "../utility/timeRemaining.mjs";
 import { getListingData } from "../utility/singleListingUtils/fetchListingData.mjs";
+import { showToastMessage } from "../toastMessages/showToastMessage.mjs";
 
 const debounceState = { timeout: null };
 
@@ -68,11 +69,11 @@ export function generateAuctionCards(data, appendContainer, winner) {
   }
 
   if (!container) {
-    console.error(`Container with ID "${appendContainer}" not found.`);
+    showToastMessage("Something went wrong, container doesn't exist", "error");
     return;
   }
 
-  container.innerHTML = "";
+  container.replaceChildren();
 
   data.forEach((item) => {
     const { id, title, media, seller, _count, tags, endsAt, amount, listing, created } = item;
@@ -164,11 +165,11 @@ export function generateAuctionCards(data, appendContainer, winner) {
       sellerName.classList.add("h-4");
 
       const timeLeft = getTimeRemaining(listing.endsAt);
-      timeRemaining.innerHTML = `Time remaining: <span class="text-red-500">${timeLeft}</span>`;
+      timeRemaining.textContent = `Time remaining: ${timeLeft}`;
+      timeRemaining.className = "text-red-500";
 
-      category.innerHTML = `Category: <span class="font-semibold text-black">${
-        listing.tags[0] || "No category"
-      }</span>`;
+      category.textContent = `Category: ${listing.tags[0] || "No category"}`;
+      category.className = "font-semibold text-black";
 
       const dateISO = listing.created;
       const dateConvert = new Date(dateISO);
@@ -192,7 +193,8 @@ export function generateAuctionCards(data, appendContainer, winner) {
 
       const timeLeft = getTimeRemaining(endsAt);
       const isEnded = timeLeft === "Ended";
-      timeRemaining.innerHTML = `Time remaining: <span class="text-red-500">${timeLeft}</span>`;
+      timeRemaining.textContent = `Time remaining: ${timeLeft}`;
+      timeRemaining.className = "text-red-500";
 
       const now = new Date();
       const ends = new Date(endsAt);
@@ -218,7 +220,8 @@ export function generateAuctionCards(data, appendContainer, winner) {
         }
       }
 
-      category.innerHTML = `Category: <span class="font-semibold text-black">${tags[0] || "No category"}</span>`;
+      category.textContent = `Category: ${tags[0] || "No category"}`;
+      category.className = "font-semibold text-black";
 
       const dateISO = created;
       const dateConvert = new Date(dateISO);
